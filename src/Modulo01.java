@@ -4,8 +4,13 @@ import javax.swing.*;
 
 public class Modulo01 implements ModuloInterface {
 
-    public static void main(String[] args) {
+    private BombaInterface bomba;
 
+    public Modulo01(BombaInterface bomba) {
+        this.bomba = bomba;
+    }
+
+    public Modulo01() {
     }
 
     @Override
@@ -30,7 +35,7 @@ public class Modulo01 implements ModuloInterface {
 
     @Override
     public void conectarBomba(BombaInterface bombaInterface) {
-        throw new NotImplementedException();
+        this.bomba = bombaInterface;
     }
 
     @Override
