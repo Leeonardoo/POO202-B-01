@@ -1,3 +1,5 @@
+import data.LogManager;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -7,6 +9,7 @@ public class FakeBomb implements BombaInterface {
 
     public FakeBomb() {
         this.modulo01 = new Modulo01(this, 0);
+        LogManager.getInstance(getCaminhoArquivos());
     }
 
     @Override
@@ -16,7 +19,7 @@ public class FakeBomb implements BombaInterface {
 
     @Override
     public Path getCaminhoArquivos() {
-        return Paths.get("/logs-fake");
+        return Paths.get("logs-fake");
     }
 
     @Override

@@ -4,13 +4,8 @@ import callback.EnigmaInterface;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.Font;
-import javax.swing.JRadioButton;
-import javax.swing.JButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class Enigma2LogicaUi {
@@ -95,5 +90,9 @@ public class Enigma2LogicaUi {
         ));
         table.setBounds(53, 61, 225, 48);
         frame.getContentPane().add(table);
+    }
+
+    public JPanel getJFrame() {
+        return (JPanel) frame.getContentPane();
     }
 }

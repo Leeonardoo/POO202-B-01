@@ -4,13 +4,9 @@ import callback.EnigmaInterface;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.Font;
 import java.awt.Color;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 
 public class Enigma1LogicaUi {
 
@@ -89,5 +85,9 @@ public class Enigma1LogicaUi {
         JButton btnNewButton = new JButton("Confirmar");
         btnNewButton.setBounds(211, 159, 94, 29);
         frame.getContentPane().add(btnNewButton);
+    }
+
+    public JPanel getJFrame() {
+        return (JPanel) frame.getContentPane();
     }
 }

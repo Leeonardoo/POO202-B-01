@@ -2,16 +2,14 @@ package enigma;
 
 import callback.EnigmaInterface;
 import callback.ModuleBehaviour;
-import enigma.BaseEnigma;
 import ui.Enigma1LogicaUi;
-import ui.Enigma2LogicaUi;
 
-public class Enigma2Logica extends BaseEnigma implements EnigmaInterface<Integer> {
+public class Enigma1LogicaProposicional extends BaseEnigma implements EnigmaInterface<Integer> {
 
     private ModuleBehaviour modulo;
-    private Enigma2LogicaUi enigma;
+    private Enigma1LogicaUi enigma;
 
-    public Enigma2Logica(ModuleBehaviour modulo) {
+    public Enigma1LogicaProposicional(ModuleBehaviour modulo) {
         this.modulo = modulo;
         this.setUi(enigma.getJFrame());
     }

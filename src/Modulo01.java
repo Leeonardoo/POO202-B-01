@@ -1,4 +1,5 @@
 import callback.ModuleBehaviour;
+import data.LogManager;
 import enigma.BaseEnigma;
 import enigma.Enigma1Logica;
 import enigma.Enigma2Logica;
@@ -9,9 +10,11 @@ public class Modulo01 implements ModuloInterface, ModuleBehaviour {
 
     private BombaInterface bomba;
     private BaseEnigma enigma;
+    private LogManager logManager;
 
     public Modulo01(BombaInterface bomba, int enigmaIndex) {
         this.bomba = bomba;
+        this.logManager = LogManager.getInstance(bomba.getCaminhoArquivos());
         this.setEnigmaWith(enigmaIndex);
     }
 
@@ -28,17 +31,17 @@ public class Modulo01 implements ModuloInterface, ModuleBehaviour {
 
     @Override
     public int getQuantasAtivacoes() {
-        return -1; //TODO
+        return 0; //TODO
     }
 
     @Override
     public int getQuantasExecucoes(byte b) {
-        return -1; //TODO
+        return 0; //TODO
     }
 
     @Override
     public int getQuantasRespostasCorretas(byte b) {
-        return -1; //TODO
+        return 0; //TODO
     }
 
     @Override
