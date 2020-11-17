@@ -1,6 +1,4 @@
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import javax.swing.*;
+import javax.swing.JPanel;
 
 public class Modulo01 implements ModuloInterface {
 
@@ -15,22 +13,22 @@ public class Modulo01 implements ModuloInterface {
 
     @Override
     public int getQuantasAtivacoes() {
-        throw new NotImplementedException();
+        return -1;
     }
 
     @Override
     public int getQuantasExecucoes(byte b) {
-        throw new NotImplementedException();
+    	return -1;
     }
 
     @Override
     public int getQuantasRespostasCorretas(byte b) {
-        throw new NotImplementedException();
+    	return -1;
     }
 
     @Override
     public boolean estaResolvido() {
-        throw new NotImplementedException();
+        return false;
     }
 
     @Override
@@ -40,6 +38,6 @@ public class Modulo01 implements ModuloInterface {
 
     @Override
     public JPanel getPainelModulo() {
-        throw new NotImplementedException();
+        return null;
     }
 }

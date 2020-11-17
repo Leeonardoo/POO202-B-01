@@ -1,5 +1,3 @@
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.nio.file.Path;
 
 public class FakeBomb implements BombaInterface {
@@ -12,16 +10,16 @@ public class FakeBomb implements BombaInterface {
 
     @Override
     public void addErro() {
-        throw new NotImplementedException();
+
     }
 
     @Override
     public Path getCaminhoArquivos() {
-        throw new NotImplementedException();
+        return null;
     }
 
     @Override
     public void informarDesarme(ModuloInterface moduloInterface) {
-        throw new NotImplementedException();
+
     }
 }
