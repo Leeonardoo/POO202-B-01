@@ -5,8 +5,8 @@ import java.nio.file.Paths;
 
 public class FakeBomb implements BombaInterface {
 
-    private JFrame frame;
     private final ModuloInterface modulo01;
+    private JFrame frame;
 
     /**
      * Create the application.

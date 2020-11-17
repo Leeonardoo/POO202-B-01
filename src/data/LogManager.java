@@ -13,17 +13,13 @@ import java.util.logging.SimpleFormatter;
 //TODO
 public class LogManager {
 
-    private static volatile LogManager INSTANCE;
-    private final Path basePath;
     private final Path currentFilePath;
     private final Logger logger = Logger.getLogger("Modulo01");
 
-    private LogManager(Path basePath) {
+    public LogManager(Path basePath) {
         //Define o formato padrão dos logs
         System.setProperty("java.util.logging.SimpleFormatter.format",
                 "%1$tF %1$tT %4$s %2$s %5$s%6$s%n");
-
-        this.basePath = basePath;
 
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter nameDtf = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS");
@@ -46,27 +42,6 @@ public class LogManager {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    /**
-     * Gets a single instance, double-checking in case getInstance
-     * is called from multiple threads, so it can be safe to assume
-     * only one instance will ever be created and no race conditions
-     * will ever occur between the multiple threads.
-     *
-     * @return the actual instance
-     */
-    public static LogManager getInstance(Path basePath) {
-        LogManager result = INSTANCE;
-        if (result != null) {
-            return result;
-        }
-        synchronized (LogManager.class) {
-            if (INSTANCE == null) {
-                INSTANCE = new LogManager(basePath);
-            }
-            return INSTANCE;
         }
     }
 

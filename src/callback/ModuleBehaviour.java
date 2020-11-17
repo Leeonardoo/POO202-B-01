@@ -1,6 +1,6 @@
 package callback;
 
-import java.nio.file.Path;
+import data.LogManager;
 
 public interface ModuleBehaviour {
 
@@ -8,5 +8,5 @@ public interface ModuleBehaviour {
 
     void notifyResolved();
 
-    Path getBasePath();
+    LogManager getLogManager();
 }

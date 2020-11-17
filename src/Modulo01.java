@@ -6,7 +6,6 @@ import enigma.Enigma1LogicaProposicional;
 import enigma.Enigma2Logica;
 
 import javax.swing.*;
-import java.nio.file.Path;
 
 public class Modulo01 implements ModuloInterface, ModuleBehaviour {
 
@@ -18,7 +17,7 @@ public class Modulo01 implements ModuloInterface, ModuleBehaviour {
     public Modulo01(BombaInterface bomba, int enigmaIndex) {
         this.setEnigmaIndex(enigmaIndex);
         this.bomba = bomba;
-        this.logManager = LogManager.getInstance(bomba.getCaminhoArquivos());
+        this.logManager = new LogManager(bomba.getCaminhoArquivos());
         this.setEnigma();
     }
 
@@ -101,7 +100,7 @@ public class Modulo01 implements ModuloInterface, ModuleBehaviour {
     }
 
     @Override
-    public Path getBasePath() {
-        return bomba.getCaminhoArquivos();
+    public LogManager getLogManager() {
+        return logManager;
     }
 }
