@@ -1,6 +1,8 @@
+import callback.InternalModuleBehaviour;
+
 import javax.swing.JPanel;
 
-public class Modulo01 implements ModuloInterface {
+public class Modulo01 implements ModuloInterface, InternalModuleBehaviour {
 
     private BombaInterface bomba;
     private BaseEnigma enigma;
@@ -60,5 +62,15 @@ public class Modulo01 implements ModuloInterface {
             case 2:
                 this.enigma = new Enigma2Logica(this);
         }
+    }
+
+    @Override
+    public void notifyError() {
+        bomba.addErro();
+    }
+
+    @Override
+    public void notifyResolved() {
+        bomba.informarDesarme(this);
     }
 }

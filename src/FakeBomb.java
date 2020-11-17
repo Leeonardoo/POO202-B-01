@@ -1,4 +1,5 @@
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FakeBomb implements BombaInterface {
 
@@ -15,7 +16,7 @@ public class FakeBomb implements BombaInterface {
 
     @Override
     public Path getCaminhoArquivos() {
-        return null;
+        return Paths.get("/logs-fake");
     }
 
     @Override
