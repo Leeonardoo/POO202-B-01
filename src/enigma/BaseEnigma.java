@@ -1,3 +1,5 @@
+package enigma;
+
 import javax.swing.*;
 
 public class BaseEnigma {

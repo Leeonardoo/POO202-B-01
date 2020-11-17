@@ -1,11 +1,14 @@
+package enigma;
+
 import callback.EnigmaInterface;
-import callback.InternalModuleBehaviour;
+import callback.ModuleBehaviour;
+import enigma.BaseEnigma;
 
 public class Enigma1Logica extends BaseEnigma implements EnigmaInterface<Integer> {
 
-    private InternalModuleBehaviour modulo;
+    private ModuleBehaviour modulo;
 
-    public Enigma1Logica(InternalModuleBehaviour modulo) {
+    public Enigma1Logica(ModuleBehaviour modulo) {
         this.modulo = modulo;
     }
 

@@ -1,8 +1,11 @@
-import callback.InternalModuleBehaviour;
+import callback.ModuleBehaviour;
+import enigma.BaseEnigma;
+import enigma.Enigma1Logica;
+import enigma.Enigma2Logica;
 
 import javax.swing.JPanel;
 
-public class Modulo01 implements ModuloInterface, InternalModuleBehaviour {
+public class Modulo01 implements ModuloInterface, ModuleBehaviour {
 
     private BombaInterface bomba;
     private BaseEnigma enigma;

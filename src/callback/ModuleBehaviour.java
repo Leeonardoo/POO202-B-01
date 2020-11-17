@@ -1,6 +1,6 @@
 package callback;
 
-public interface InternalModuleBehaviour {
+public interface ModuleBehaviour {
 
     void notifyError();
 

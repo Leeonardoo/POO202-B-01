@@ -1,3 +1,5 @@
+package ui;
+
 import callback.EnigmaInterface;
 
 import java.awt.EventQueue;
