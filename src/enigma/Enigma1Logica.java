@@ -6,11 +6,9 @@ import ui.Enigma1LogicaUi;
 
 public class Enigma1Logica extends BaseEnigma implements EnigmaInterface<Integer> {
 
-    private ModuleBehaviour modulo;
-    private Enigma1LogicaUi enigma;
-
-    public Enigma1Logica(ModuleBehaviour modulo) {
-        this.modulo = modulo;
+    public Enigma1Logica(ModuleBehaviour modulo, int enigmaIndex) {
+        super(modulo, enigmaIndex);
+        Enigma1LogicaUi enigma = new Enigma1LogicaUi(this);
         this.setUi(enigma.getJFrame());
     }
 
@@ -18,11 +16,8 @@ public class Enigma1Logica extends BaseEnigma implements EnigmaInterface<Integer
     @Override
     public boolean onUserConfirm(Integer answer) {
         //Check if(.....)
-        super.setResolved(true);
-        super.setResolved(false);
-
-        modulo.notifyError();
-        modulo.notifyResolved();
+        super.registerCorrectAnswer();
+        super.registerError();
 
         return true; //Disable input on UI
     }

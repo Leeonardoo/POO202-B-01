@@ -2,38 +2,20 @@ package ui;
 
 import callback.EnigmaInterface;
 
-import java.awt.EventQueue;
-
 import javax.swing.*;
-import java.awt.Font;
-import java.awt.Color;
+import java.awt.*;
 
 public class Enigma1LogicaUi {
 
-    private JFrame frame;
     private final ButtonGroup buttonGroup = new ButtonGroup();
-    private EnigmaInterface<Integer> enigmaCallback;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Enigma1LogicaUi window = new Enigma1LogicaUi();
-                    window.frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    private final EnigmaInterface<Integer> enigmaCallback;
+    private JFrame frame;
 
     /**
      * Create the application.
      */
-    public Enigma1LogicaUi() {
+    public Enigma1LogicaUi(EnigmaInterface<Integer> enigmaCallback) {
+        this.enigmaCallback = enigmaCallback;
         initialize();
     }
 
@@ -83,6 +65,9 @@ public class Enigma1LogicaUi {
         frame.getContentPane().add(rdbtnNewRadioButton_3);
 
         JButton btnNewButton = new JButton("Confirmar");
+        btnNewButton.addActionListener(arg0 -> {
+            enigmaCallback.onUserConfirm(0);
+        });
         btnNewButton.setBounds(211, 159, 94, 29);
         frame.getContentPane().add(btnNewButton);
     }

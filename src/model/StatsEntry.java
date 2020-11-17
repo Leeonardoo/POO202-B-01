@@ -1,18 +1,12 @@
 package model;
 
-import javax.xml.bind.annotation.XmlAttribute;
-
 public class StatsEntry {
-    @XmlAttribute
-    /*private */ public int totalActivations;   //Module
+    private int totalActivations;
+    private int totalExecutions;
+    private int totalRightAnswers;
+    private int totalWrongAnswers;
 
-    @XmlAttribute
-    /*private */ public int totalExecutions;    //Enigma
-
-    @XmlAttribute
-    /*private */ public int totalRightAnswers;  //Enigma
-
-    /*public int getTotalActivations() {
+    public int getTotalActivations() {
         return totalActivations;
     }
 
@@ -43,5 +37,13 @@ public class StatsEntry {
             throw new IllegalArgumentException("O número de respostas certas não pode ser menor que 0!");
         }
         this.totalRightAnswers = totalRightAnswers;
-    }*/
+    }
+
+    public int getTotalWrongAnswers() {
+        return totalWrongAnswers;
+    }
+
+    public void setTotalWrongAnswers(int totalWrongAnswers) {
+        this.totalWrongAnswers = totalWrongAnswers;
+    }
 }

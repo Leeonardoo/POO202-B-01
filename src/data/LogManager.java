@@ -74,31 +74,31 @@ public class LogManager {
         return 1;
     }
 
-    public int getQuantasExecucoesEnigma(byte enigma) {
+    public int getQuantasExecucoesEnigma(int enigma) {
         return 1;
     }
 
-    public int getQuantasRespostasCorretasEnigma(byte enigma) {
+    public int getQuantasRespostasCorretasEnigma(int enigma) {
         return 1;
     }
 
-    public int getQuantosErrosCometidosEnigma(byte enigma) {
+    public int getQuantosErrosCometidosEnigma(int enigma) {
         return 1;
     }
 
-    private void setQuantasAtivacoes(int valor) {
+    public void addQuantasAtivacoes() {
 
     }
 
-    private void setQuantasExecucoesEnigma(byte enigma, int valor) {
+    public void addQuantasExecucoesEnigma(int enigma) {
 
     }
 
-    private void setQuantasRespostasCorretasEnigma(byte enigma, int valor) {
+    public void addQuantasRespostasCorretasEnigma(int enigma) {
 
     }
 
-    private void setQuantosErrosCometidosEnigma(byte enigma, int valor) {
+    public void addQuantosErrosCometidosEnigma(int enigma) {
 
     }
 }

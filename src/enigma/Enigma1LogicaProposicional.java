@@ -2,15 +2,13 @@ package enigma;
 
 import callback.EnigmaInterface;
 import callback.ModuleBehaviour;
-import ui.Enigma1LogicaUi;
+import ui.Enigma1ProposicionalUi;
 
 public class Enigma1LogicaProposicional extends BaseEnigma implements EnigmaInterface<Integer> {
 
-    private ModuleBehaviour modulo;
-    private Enigma1LogicaUi enigma;
-
-    public Enigma1LogicaProposicional(ModuleBehaviour modulo) {
-        this.modulo = modulo;
+    public Enigma1LogicaProposicional(ModuleBehaviour modulo, int enigmaIndex) {
+        super(modulo, enigmaIndex);
+        Enigma1ProposicionalUi enigma = new Enigma1ProposicionalUi(this);
         this.setUi(enigma.getJFrame());
     }
 
@@ -18,11 +16,8 @@ public class Enigma1LogicaProposicional extends BaseEnigma implements EnigmaInte
     @Override
     public boolean onUserConfirm(Integer answer) {
         //Check if(.....)
-        super.setResolved(true);
-        super.setResolved(false);
-
-        modulo.notifyError();
-        modulo.notifyResolved();
+        super.registerCorrectAnswer();
+        super.registerError();
 
         return true; //Disable input on UI
     }

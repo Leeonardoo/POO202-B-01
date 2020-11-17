@@ -2,39 +2,22 @@ package ui;
 
 import callback.EnigmaInterface;
 
-import java.awt.EventQueue;
-
 import javax.swing.*;
-import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 public class Enigma2LogicaUi {
 
-    private JFrame frame;
     private final ButtonGroup buttonGroup = new ButtonGroup();
+    private final EnigmaInterface<Integer> enigmaCallback;
+    private JFrame frame;
     private JTable table;
-    private EnigmaInterface<Integer> enigmaCallback;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Enigma2LogicaUi window = new Enigma2LogicaUi();
-                    window.frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     /**
      * Create the application.
      */
-    public Enigma2LogicaUi() {
+    public Enigma2LogicaUi(EnigmaInterface<Integer> enigmaCallback) {
+        this.enigmaCallback = enigmaCallback;
         initialize();
     }
 
@@ -73,6 +56,9 @@ public class Enigma2LogicaUi {
         frame.getContentPane().add(rdbtnNewRadioButton_3);
 
         JButton btnNewButton = new JButton("Confirmar");
+        btnNewButton.addActionListener(arg0 -> {
+            enigmaCallback.onUserConfirm(0);
+        });
         btnNewButton.setBounds(210, 148, 89, 23);
         frame.getContentPane().add(btnNewButton);
 
