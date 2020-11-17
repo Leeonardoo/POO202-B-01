@@ -5,7 +5,7 @@ public class FakeBomb implements BombaInterface {
     private ModuloInterface modulo01;
 
     public FakeBomb() {
-        this.modulo01 = new Modulo01(this);
+        this.modulo01 = new Modulo01(this, 0);
     }
 
     @Override
