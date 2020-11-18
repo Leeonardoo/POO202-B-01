@@ -1,24 +1,20 @@
 package enigma;
 
-import callback.EnigmaInterface;
 import callback.ModuleBehaviour;
+import model.Enigma;
 import ui.Enigma2LogicaUi;
 
-public class Enigma2Logica extends BaseEnigma implements EnigmaInterface<Integer> {
+public class Enigma2Logica extends BaseEnigma {
 
-    public Enigma2Logica(ModuleBehaviour modulo, int enigmaIndex) {
-        super(modulo, enigmaIndex);
-        Enigma2LogicaUi enigma = new Enigma2LogicaUi(this);
-        this.setUi(enigma.getJFrame());
-    }
+    private final Enigma enigma;
 
-    //TODO
-    @Override
-    public boolean onUserConfirm(Integer answer) {
-        //Check if(.....)
-        super.registerCorrectAnswer();
-        super.registerError();
+    public Enigma2Logica(ModuleBehaviour modulo) {
+        super(modulo);
 
-        return true; //Disable input on UI
+        enigma = new Enigma();
+        super.setEnigma(enigma);
+
+        Enigma2LogicaUi enigmaUi = new Enigma2LogicaUi(this, enigma);
+        this.setUi(enigmaUi.getJPanel());
     }
 }

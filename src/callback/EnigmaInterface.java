@@ -1,7 +1,7 @@
 package callback;
 
-public interface EnigmaInterface<T> {
+public interface EnigmaInterface {
 
-    boolean onUserConfirm(T answer);
+    boolean onUserConfirm(int answer);
 
 }

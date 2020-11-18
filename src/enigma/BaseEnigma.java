@@ -1,19 +1,20 @@
 package enigma;
 
+import callback.EnigmaInterface;
 import callback.ModuleBehaviour;
+import model.Enigma;
 
 import javax.swing.*;
 
-public abstract class BaseEnigma {
+public abstract class BaseEnigma implements EnigmaInterface {
 
     private ModuleBehaviour modulo;
     private boolean isResolved = false;
     private JPanel ui;
-    private int enigmaIndex;
+    private Enigma enigma;
 
-    public BaseEnigma(ModuleBehaviour modulo, int enigmaIndex) {
+    public BaseEnigma(ModuleBehaviour modulo) {
         this.setModulo(modulo);
-        this.setEnigmaIndex(enigmaIndex);
     }
 
     public boolean isResolved() {
@@ -32,14 +33,6 @@ public abstract class BaseEnigma {
         this.ui = ui;
     }
 
-    public int getEnigmaIndex() {
-        return enigmaIndex;
-    }
-
-    public void setEnigmaIndex(int enigmaIndex) {
-        this.enigmaIndex = enigmaIndex;
-    }
-
     private ModuleBehaviour getModulo() {
         return this.modulo;
     }
@@ -49,14 +42,32 @@ public abstract class BaseEnigma {
     }
 
     public void registerError() {
-        this.getModulo().getLogManager().addQuantosErrosCometidosEnigma(getEnigmaIndex());
-        this.setResolved(false);
-        this.getModulo().notifyError();
+        getModulo().getLogManager().addQuantosErrosCometidosEnigma(getEnigma().getId());
+        setResolved(false);
+        getModulo().notifyError();
     }
 
     public void registerCorrectAnswer() {
-        this.getModulo().getLogManager().addQuantasRespostasCorretasEnigma(getEnigmaIndex());
-        this.setResolved(true);
-        this.getModulo().notifyResolved();
+        getModulo().getLogManager().addQuantasRespostasCorretasEnigma(getEnigma().getId());
+        setResolved(true);
+        getModulo().notifyResolved();
+    }
+
+    public Enigma getEnigma() {
+        return enigma;
+    }
+
+    public void setEnigma(Enigma enigma) {
+        this.enigma = enigma;
+        modulo.getLogManager().addQuantasExecucoesEnigma((byte) enigma.getId());
+    }
+
+    @Override
+    public boolean onUserConfirm(int answer) {
+        //Check if(.....)
+        registerCorrectAnswer();
+        registerError();
+
+        return true; //Disable input on UI
     }
 }

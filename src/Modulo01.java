@@ -66,19 +66,17 @@ public class Modulo01 implements ModuloInterface, ModuleBehaviour {
     }
 
     private void setEnigma() {
-        this.logManager.addQuantasExecucoesEnigma((byte) enigmaIndex);
-
         switch (enigmaIndex) {
             case 0:
-                this.enigma = new Enigma1Logica(this, enigmaIndex);
+                this.enigma = new Enigma1Logica(this);
                 break;
 
             case 1:
-                this.enigma = new Enigma2Logica(this, enigmaIndex);
+                this.enigma = new Enigma2Logica(this);
                 break;
 
             case 2:
-                this.enigma = new Enigma1LogicaProposicional(this, enigmaIndex);
+                this.enigma = new Enigma1LogicaProposicional(this);
                 break;
         }
     }

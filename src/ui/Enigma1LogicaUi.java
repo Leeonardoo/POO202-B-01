@@ -1,6 +1,7 @@
 package ui;
 
 import callback.EnigmaInterface;
+import model.Enigma;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,14 +9,16 @@ import java.awt.*;
 public class Enigma1LogicaUi {
 
     private final ButtonGroup buttonGroup = new ButtonGroup();
-    private final EnigmaInterface<Integer> enigmaCallback;
+    private final EnigmaInterface enigmaCallback;
+    private final Enigma enigma;
     private JFrame frame;
 
     /**
      * Create the application.
      */
-    public Enigma1LogicaUi(EnigmaInterface<Integer> enigmaCallback) {
+    public Enigma1LogicaUi(EnigmaInterface enigmaCallback, Enigma enigma) {
         this.enigmaCallback = enigmaCallback;
+        this.enigma = enigma;
         initialize();
     }
 
@@ -72,7 +75,7 @@ public class Enigma1LogicaUi {
         frame.getContentPane().add(btnNewButton);
     }
 
-    public JPanel getJFrame() {
+    public JPanel getJPanel() {
         return (JPanel) frame.getContentPane();
     }
 }

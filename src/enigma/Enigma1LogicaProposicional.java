@@ -1,24 +1,20 @@
 package enigma;
 
-import callback.EnigmaInterface;
 import callback.ModuleBehaviour;
+import model.Enigma;
 import ui.Enigma1ProposicionalUi;
 
-public class Enigma1LogicaProposicional extends BaseEnigma implements EnigmaInterface<Integer> {
+public class Enigma1LogicaProposicional extends BaseEnigma {
 
-    public Enigma1LogicaProposicional(ModuleBehaviour modulo, int enigmaIndex) {
-        super(modulo, enigmaIndex);
-        Enigma1ProposicionalUi enigma = new Enigma1ProposicionalUi(this);
-        this.setUi(enigma.getJFrame());
-    }
+    private final Enigma enigma;
 
-    //TODO
-    @Override
-    public boolean onUserConfirm(Integer answer) {
-        //Check if(.....)
-        super.registerCorrectAnswer();
-        super.registerError();
+    public Enigma1LogicaProposicional(ModuleBehaviour modulo) {
+        super(modulo);
 
-        return true; //Disable input on UI
+        enigma = new Enigma();
+        super.setEnigma(enigma);
+
+        Enigma1ProposicionalUi enigmaUi = new Enigma1ProposicionalUi(this, enigma);
+        this.setUi(enigmaUi.getJPanel());
     }
 }

@@ -1,10 +1,7 @@
 package model;
 
 public class StatsEntry {
-    private int totalActivations;
-    private int totalExecutions;
-    private int totalRightAnswers;
-    private int totalWrongAnswers;
+    private int enigmaId, totalActivations, totalExecutions, totalRightAnswers, totalWrongAnswers;
 
     public int getTotalActivations() {
         return totalActivations;
@@ -45,5 +42,13 @@ public class StatsEntry {
 
     public void setTotalWrongAnswers(int totalWrongAnswers) {
         this.totalWrongAnswers = totalWrongAnswers;
+    }
+
+    public int getEnigmaId() {
+        return enigmaId;
+    }
+
+    public void setEnigmaId(int enigmaId) {
+        this.enigmaId = enigmaId;
     }
 }
