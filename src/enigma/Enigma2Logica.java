@@ -6,15 +6,11 @@ import ui.Enigma2LogicaUi;
 
 public class Enigma2Logica extends BaseEnigma {
 
-    private final Enigma enigma;
-
     public Enigma2Logica(ModuleBehaviour modulo) {
         super(modulo);
+        super.setEnigma(new Enigma());
 
-        enigma = new Enigma();
-        super.setEnigma(enigma);
-
-        Enigma2LogicaUi enigmaUi = new Enigma2LogicaUi(this, enigma);
+        Enigma2LogicaUi enigmaUi = new Enigma2LogicaUi(this);
         this.setUi(enigmaUi.getJPanel());
     }
 }

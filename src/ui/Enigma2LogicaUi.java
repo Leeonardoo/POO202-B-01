@@ -1,26 +1,22 @@
 package ui;
 
 import callback.EnigmaInterface;
-import model.Enigma;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class Enigma2LogicaUi {
+public class Enigma2LogicaUi extends BaseEnigmaUi {
 
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private final EnigmaInterface enigmaCallback;
-    private final Enigma enigma;
-    private JFrame frame;
     private JTable table;
 
     /**
      * Create the application.
      */
-    public Enigma2LogicaUi(EnigmaInterface enigmaCallback, Enigma enigma) {
+    public Enigma2LogicaUi(EnigmaInterface enigmaCallback) {
         this.enigmaCallback = enigmaCallback;
-        this.enigma = enigma;
         initialize();
     }
 
@@ -28,7 +24,7 @@ public class Enigma2LogicaUi {
      * Initialize the contents of the frame.
      */
     private void initialize() {
-        frame = new JFrame();
+        JFrame frame = new JFrame();
         frame.setBounds(100, 100, 350, 250);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
@@ -79,9 +75,7 @@ public class Enigma2LogicaUi {
         ));
         table.setBounds(53, 61, 225, 48);
         frame.getContentPane().add(table);
-    }
 
-    public JPanel getJPanel() {
-        return (JPanel) frame.getContentPane();
+        super.setJFrame(frame);
     }
 }

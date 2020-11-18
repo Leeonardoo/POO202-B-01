@@ -53,6 +53,7 @@ public abstract class BaseEnigma implements EnigmaInterface {
         getModulo().notifyResolved();
     }
 
+    @Override
     public Enigma getEnigma() {
         return enigma;
     }

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Random;
 
 public class FakeBomb implements BombaInterface {
 
@@ -12,7 +13,7 @@ public class FakeBomb implements BombaInterface {
      * Create the application.
      */
     public FakeBomb() {
-        this.modulo01 = new Modulo01(this, 0);
+        this.modulo01 = new Modulo01(this, new Random().nextInt((4)));
         initialize();
     }
 
@@ -56,5 +57,4 @@ public class FakeBomb implements BombaInterface {
     public void informarDesarme(ModuloInterface moduloInterface) {
 
     }
-
 }

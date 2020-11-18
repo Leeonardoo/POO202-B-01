@@ -1,24 +1,20 @@
 package ui;
 
 import callback.EnigmaInterface;
-import model.Enigma;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Enigma1ProposicionalUi {
+public class Enigma1ProposicionalUi extends BaseEnigmaUi {
 
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private final EnigmaInterface enigmaCallback;
-    private final Enigma enigma;
-    private JFrame frame;
 
     /**
      * Create the application.
      */
-    public Enigma1ProposicionalUi(EnigmaInterface enigmaCallback, Enigma enigma) {
+    public Enigma1ProposicionalUi(EnigmaInterface enigmaCallback) {
         this.enigmaCallback = enigmaCallback;
-        this.enigma = enigma;
         initialize();
     }
 
@@ -26,7 +22,7 @@ public class Enigma1ProposicionalUi {
      * Initialize the contents of the frame.
      */
     private void initialize() {
-        frame = new JFrame();
+        JFrame frame = new JFrame();
         frame.setBounds(100, 100, 350, 250);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
@@ -67,9 +63,7 @@ public class Enigma1ProposicionalUi {
         });
         btnNewButton.setBounds(120, 170, 89, 23);
         frame.getContentPane().add(btnNewButton);
-    }
 
-    public JPanel getJPanel() {
-        return (JPanel) frame.getContentPane();
+        super.setJFrame(frame);
     }
 }

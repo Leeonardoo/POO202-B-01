@@ -6,15 +6,11 @@ import ui.Enigma1ProposicionalUi;
 
 public class Enigma1LogicaProposicional extends BaseEnigma {
 
-    private final Enigma enigma;
-
     public Enigma1LogicaProposicional(ModuleBehaviour modulo) {
         super(modulo);
+        super.setEnigma(new Enigma());
 
-        enigma = new Enigma();
-        super.setEnigma(enigma);
-
-        Enigma1ProposicionalUi enigmaUi = new Enigma1ProposicionalUi(this, enigma);
+        Enigma1ProposicionalUi enigmaUi = new Enigma1ProposicionalUi(this);
         this.setUi(enigmaUi.getJPanel());
     }
 }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>model.StatsEntry</OriginalElement>
+  <nodes>
+    <node x="254.0" y="0.0">ModuloInterface</node>
+    <node x="288.0" y="1329.0">ui.Enigma2ProposicionalUi</node>
+    <node x="1309.0" y="579.0">enigma.Enigma1LogicaProposicional</node>
+    <node x="114.0" y="229.0">Modulo01</node>
+    <node x="286.0" y="851.0">FakeBomb</node>
+    <node x="783.0" y="579.0">enigma.Enigma2LogicaProposicional</node>
+    <node x="0.0" y="694.0">model.StatsEntry</node>
+    <node x="960.0" y="0.0">callback.EnigmaInterface</node>
+    <node x="939.5" y="133.0">enigma.BaseEnigma</node>
+    <node x="286.0" y="694.0">BombaInterface</node>
+    <node x="1129.0" y="1135.0">data.LogManager</node>
+    <node x="1111.0" y="579.0">enigma.Enigma2Logica</node>
+    <node x="623.0" y="694.0">model.Enigma</node>
+    <node x="576.0" y="1317.0">ui.Enigma2LogicaUi</node>
+    <node x="840.0" y="1329.0">ui.Enigma1LogicaUi</node>
+    <node x="0.0" y="36.0">callback.ModuleBehaviour</node>
+    <node x="466.0" y="1135.0">ui.BaseEnigmaUi</node>
+    <node x="0.0" y="1329.0">ui.Enigma1ProposicionalUi</node>
+    <node x="585.0" y="579.0">enigma.Enigma1Logica</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="enigma.Enigma1LogicaProposicional" target="enigma.BaseEnigma">
+      <point x="0.0" y="-16.5" />
+      <point x="1463.0" y="549.0" />
+      <point x="1165.25" y="549.0" />
+      <point x="96.75" y="198.0" />
+    </edge>
+    <edge source="ui.Enigma1LogicaUi" target="ui.BaseEnigmaUi">
+      <point x="0.0" y="-54.0" />
+      <point x="962.0" y="1287.0" />
+      <point x="630.5" y="1287.0" />
+      <point x="70.5" y="66.0" />
+    </edge>
+    <edge source="ui.Enigma1ProposicionalUi" target="ui.BaseEnigmaUi">
+      <point x="0.0" y="-54.0" />
+      <point x="134.0" y="1287.0" />
+      <point x="489.5" y="1287.0" />
+      <point x="-70.5" y="66.0" />
+    </edge>
+    <edge source="Modulo01" target="callback.ModuleBehaviour">
+      <point x="-71.5" y="-210.0" />
+      <point x="185.5" y="204.0" />
+      <point x="117.0" y="204.0" />
+      <point x="0.0" y="53.5" />
+    </edge>
+    <edge source="ui.Enigma2LogicaUi" target="ui.BaseEnigmaUi">
+      <point x="0.0" y="-66.0" />
+      <point x="698.0" y="1297.0" />
+      <point x="583.5" y="1297.0" />
+      <point x="23.5" y="66.0" />
+    </edge>
+    <edge source="enigma.BaseEnigma" target="callback.EnigmaInterface">
+      <point x="0.0" y="-198.0" />
+      <point x="0.0" y="41.5" />
+    </edge>
+    <edge source="enigma.Enigma2LogicaProposicional" target="enigma.BaseEnigma">
+      <point x="0.0" y="-16.5" />
+      <point x="937.0" y="559.0" />
+      <point x="1036.25" y="559.0" />
+      <point x="-32.25" y="198.0" />
+    </edge>
+    <edge source="FakeBomb" target="BombaInterface">
+      <point x="0.0" y="-102.0" />
+      <point x="0.0" y="53.5" />
+    </edge>
+    <edge source="Modulo01" target="ModuloInterface">
+      <point x="71.5" y="-210.0" />
+      <point x="328.5" y="204.0" />
+      <point x="397.0" y="204.0" />
+      <point x="0.0" y="89.5" />
+    </edge>
+    <edge source="ui.Enigma2ProposicionalUi" target="ui.BaseEnigmaUi">
+      <point x="0.0" y="-54.0" />
+      <point x="422.0" y="1297.0" />
+      <point x="536.5" y="1297.0" />
+      <point x="-23.5" y="66.0" />
+    </edge>
+    <edge source="enigma.Enigma2Logica" target="enigma.BaseEnigma">
+      <point x="0.0" y="-16.5" />
+      <point x="1200.0" y="559.0" />
+      <point x="1100.75" y="559.0" />
+      <point x="32.25" y="198.0" />
+    </edge>
+    <edge source="enigma.Enigma1Logica" target="enigma.BaseEnigma">
+      <point x="0.0" y="-16.5" />
+      <point x="674.0" y="549.0" />
+      <point x="971.75" y="549.0" />
+      <point x="-96.75" y="198.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="667.5" y="707.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
