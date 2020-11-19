@@ -40,7 +40,7 @@ public class Enigma1ProposicionalUi extends BaseEnigmaUi {
         JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("<html>D - \u201CSe Bianca \u00E9 advogada, ent\u00E3o Ana \u00E9 professora.\u201D (R \u2192 S)");
         buttonGroup.add(rdbtnNewRadioButton_1);
         rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        rdbtnNewRadioButton_1.setBounds(6, 140, 301, 23);
+        rdbtnNewRadioButton_1.setBounds(6, 147, 301, 23);
         frame.getContentPane().add(rdbtnNewRadioButton_1);
 
         JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("<html>B - \u201CSe Bianca n\u00E3o \u00E9 advogada ent\u00E3o Ana \u00E9 professora.\u201D (\u00ACR \u2192 S)");
@@ -57,11 +57,11 @@ public class Enigma1ProposicionalUi extends BaseEnigmaUi {
         rdbtnNewRadioButton_3.setBounds(6, 110, 301, 37);
         frame.getContentPane().add(rdbtnNewRadioButton_3);
 
-        JButton btnNewButton = new JButton("Confirma");
+        JButton btnNewButton = new JButton("Confirmar");
         btnNewButton.addActionListener(arg0 -> {
             enigmaCallback.onUserConfirm(0);
         });
-        btnNewButton.setBounds(120, 170, 89, 23);
+        btnNewButton.setBounds(121, 177, 89, 23);
         frame.getContentPane().add(btnNewButton);
 
         super.setJFrame(frame);

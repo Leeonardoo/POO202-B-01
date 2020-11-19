@@ -58,7 +58,7 @@ public class Modulo01 implements ModuloInterface, ModuleBehaviour {
     }
 
     @Override
-    public JPanel getPainelModulo() {
+    public JPanel getPainelModulo(byte b) {
         return enigma.getUi();
     }
 

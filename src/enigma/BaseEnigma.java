@@ -65,10 +65,12 @@ public abstract class BaseEnigma implements EnigmaInterface {
 
     @Override
     public boolean onUserConfirm(int answer) {
-        //Check if(.....)
-        registerCorrectAnswer();
-        registerError();
-
-        return true; //Disable input on UI
+        if (answer == enigma.getCorrectAnswer()) {
+            registerCorrectAnswer();
+            return true;
+        } else {
+            registerError();
+            return false;
+        }
     }
 }

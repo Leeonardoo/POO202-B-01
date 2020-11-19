@@ -4,13 +4,17 @@ import callback.EnigmaInterface;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.util.Arrays;
 
 public class Enigma2LogicaUi extends BaseEnigmaUi {
 
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private final EnigmaInterface enigmaCallback;
     private JTable table;
+    private JButton confirmButton;
+    JPanel indicator;
 
     /**
      * Create the application.
@@ -29,53 +33,55 @@ public class Enigma2LogicaUi extends BaseEnigmaUi {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
-        JLabel lblNewLabel_1 = new JLabel("<html>Assinale a alternativa que corresponde ao n\u00FAmero faltando da tabela abaixo");
+        JLabel lblNewLabel_1 = new JLabel(enigmaCallback.getEnigma().getText());
         lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
         lblNewLabel_1.setBounds(10, 11, 314, 29);
         frame.getContentPane().add(lblNewLabel_1);
 
-        JRadioButton rdbtnNewRadioButton = new JRadioButton("A - 327");
-        buttonGroup.add(rdbtnNewRadioButton);
-        rdbtnNewRadioButton.setBounds(10, 131, 73, 23);
-        frame.getContentPane().add(rdbtnNewRadioButton);
-
-        JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("B - 485");
-        buttonGroup.add(rdbtnNewRadioButton_1);
-        rdbtnNewRadioButton_1.setBounds(10, 169, 73, 23);
-        frame.getContentPane().add(rdbtnNewRadioButton_1);
-
-        JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("C - 785");
-        buttonGroup.add(rdbtnNewRadioButton_2);
-        rdbtnNewRadioButton_2.setBounds(85, 131, 73, 23);
-        frame.getContentPane().add(rdbtnNewRadioButton_2);
-
-        JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("D - 432");
-        buttonGroup.add(rdbtnNewRadioButton_3);
-        rdbtnNewRadioButton_3.setBounds(85, 169, 73, 23);
-        frame.getContentPane().add(rdbtnNewRadioButton_3);
-
-        JButton btnNewButton = new JButton("Confirmar");
-        btnNewButton.addActionListener(arg0 -> {
-            enigmaCallback.onUserConfirm(0);
-        });
-        btnNewButton.setBounds(210, 148, 89, 23);
-        frame.getContentPane().add(btnNewButton);
-
+        String[] numbers = Arrays.copyOfRange(enigmaCallback.getEnigma().getOptions(), 0, 9);
         table = new JTable();
         table.setEnabled(false);
         table.setModel(new DefaultTableModel(
                 new Object[][]{
-                        {"288", "576", "72"},
-                        {"144", "360", "??"},
-                        {"504", "648", "216"},
+                        Arrays.copyOfRange(numbers, 0,3),
+                        Arrays.copyOfRange(numbers, 3,6),
+                        Arrays.copyOfRange(numbers, 6,9),
                 },
                 new String[]{
-                        "New column", "New column", "New column"
+                        "", "", ""
                 }
         ));
+
         table.setBounds(53, 61, 225, 48);
         frame.getContentPane().add(table);
+        
+        JComboBox comboBox_1 = new JComboBox();
+        comboBox_1.setBounds(131, 140, 67, 20);
+        comboBox_1.setModel(new DefaultComboBoxModel(Arrays.copyOfRange(enigmaCallback.getEnigma().getOptions(), 9, 13)));
+        comboBox_1.setSelectedIndex(-1);
+        frame.getContentPane().add(comboBox_1);
+
+        confirmButton = new JButton("Confirmar");
+        confirmButton.addActionListener(arg0 -> {
+            onConfirm(enigmaCallback.onUserConfirm(comboBox_1.getSelectedIndex() + 9));
+        });
+        confirmButton.setBounds(113, 177, 112, 23);
+        frame.getContentPane().add(confirmButton);
+        
+        indicator = new JPanel();
+        indicator.setBounds(324, 0, 10, 10);
+        indicator.setBackground(Color.RED);
+        frame.getContentPane().add(indicator);
 
         super.setJFrame(frame);
+    }
+
+    private void onConfirm(boolean isCorrect) {
+        if (isCorrect) {
+            indicator.setBackground(Color.GREEN);
+            confirmButton.setEnabled(false);
+        } else {
+            indicator.setBackground(Color.RED);
+        }
     }
 }
