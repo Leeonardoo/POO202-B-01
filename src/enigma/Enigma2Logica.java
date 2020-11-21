@@ -10,7 +10,7 @@ public class Enigma2Logica extends BaseEnigma {
         super(modulo);
         Enigma enigma = new Enigma();
         enigma.setId(1);
-        enigma.setText("<html>Assinale a alternativa que corresponde ao n\u00FAmero faltando da tabela abaixo");
+        enigma.setText("<html>Assinale a alternativa que corresponde ao n\u00FAmero <br> faltando da tabela abaixo");
         enigma.setOptions(new String[]{"288", "576", "72", "144", "360", "??", "504", "648", "216", "432", "327", "785", "485"});
         enigma.setCorrectAnswer(9);
         super.setEnigma(enigma);

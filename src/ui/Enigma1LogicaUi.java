@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 
 public class Enigma1LogicaUi extends BaseEnigmaUi {
 
-    private final ButtonGroup buttonGroup = new ButtonGroup();
     private final EnigmaInterface enigmaCallback;
     JPanel indicator;
     JButton btnNewButtonA, btnNewButtonB, btnNewButtonC, btnNewButtonD;
