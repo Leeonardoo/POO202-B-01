@@ -10,8 +10,8 @@ import java.awt.event.ActionEvent;
 public class Enigma1LogicaUi extends BaseEnigmaUi {
 
     private final EnigmaInterface enigmaCallback;
-    JPanel indicator;
-    JButton btnNewButtonA, btnNewButtonB, btnNewButtonC, btnNewButtonD;
+    private JPanel indicator;
+    private JButton btnNewButtonA, btnNewButtonB, btnNewButtonC, btnNewButtonD;
 
 
     /**
@@ -73,7 +73,8 @@ public class Enigma1LogicaUi extends BaseEnigmaUi {
         super.setJFrame(frame);
     }
 
-    private void onConfirm(boolean isCorrect) {
+    @Override
+    protected void onConfirm(boolean isCorrect) {
         if (isCorrect) {
             indicator.setBackground(Color.GREEN);
             btnNewButtonA.setEnabled(false);

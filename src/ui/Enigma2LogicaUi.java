@@ -14,8 +14,8 @@ public class Enigma2LogicaUi extends BaseEnigmaUi {
     private final EnigmaInterface enigmaCallback;
     private JTable table;
     private JButton confirmButton;
-    JPanel indicator;
-    JComboBox<String> comboBox_1;
+    private JPanel indicator;
+    private JComboBox<String> comboBox_1;
     private JScrollPane scrollPane;
 
     /**
@@ -108,7 +108,8 @@ public class Enigma2LogicaUi extends BaseEnigmaUi {
         super.setJFrame(frame);
     }
 
-    private void onConfirm(boolean isCorrect) {
+    @Override
+    protected void onConfirm(boolean isCorrect) {
         if (isCorrect) {
             indicator.setBackground(Color.GREEN);
             confirmButton.setEnabled(false);

@@ -7,8 +7,10 @@ import java.awt.*;
 
 public class Enigma2ProposicionalUi extends BaseEnigmaUi {
 
-    private final ButtonGroup buttonGroup = new ButtonGroup();
     private final EnigmaInterface enigmaCallback;
+    private JComboBox<String> comboBox;
+    private JButton confirmButton;
+    private JPanel indicator;
 
     /**
      * Create the application.
@@ -26,40 +28,45 @@ public class Enigma2ProposicionalUi extends BaseEnigmaUi {
         frame.setBounds(100, 100, 350, 250);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(10, 0, 314, 137);
+        frame.getContentPane().add(scrollPane);
 
-        JLabel lblNewLabel = new JLabel("<html>Dada a senten\u00E7a abaixo: <br>\r\n\"Se o lutador treina bem, ele ganha. Se o lutador n\u00E3o se alimenta bem, ele n\u00E3o treina bem. O lutador se alimentou bem. Logo, ele ganhou.\" <br>\r\nSendo: <br>\r\nL - o lutador treina bem<br>\r\nG - ele ganha<br>\r\nA - o lutador se Alimenta<br>\r\nPode-se Afirmar que a f\u00F3rmula que corresponde a seten\u00E7a \u00E9:\r\n\r\n\r\n\r\n");
-        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        lblNewLabel.setBounds(10, 0, 314, 117);
-        frame.getContentPane().add(lblNewLabel);
+        JLabel lblNewLabel = new JLabel(enigmaCallback.getEnigma().getText());
+        scrollPane.setViewportView(lblNewLabel);
+        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
 
-        JRadioButton rdbtnNewRadioButton = new JRadioButton("((L -> G) ^ (~A -> ~L) ^ A) -> G");
-        buttonGroup.add(rdbtnNewRadioButton);
-        rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        rdbtnNewRadioButton.setBounds(10, 121, 181, 23);
-        frame.getContentPane().add(rdbtnNewRadioButton);
+        confirmButton = new JButton("Confirmar");
+        confirmButton.setBounds(112, 177, 98, 23);
+        confirmButton.addActionListener(arg0 -> {
+            onConfirm(enigmaCallback.onUserConfirm(comboBox.getSelectedIndex()));
+        });
+        frame.getContentPane().add(confirmButton);
+        
+        JLabel lblNewLabel_1 = new JLabel("Resposta:");
+        lblNewLabel_1.setBounds(10, 148, 73, 14);
+        frame.getContentPane().add(lblNewLabel_1);
+        
+        comboBox = new JComboBox<>();
+        comboBox.setModel(new DefaultComboBoxModel(enigmaCallback.getEnigma().getOptions()));
+        comboBox.setSelectedIndex(-1);
+        comboBox.setBounds(77, 145, 247, 20);
+        frame.getContentPane().add(comboBox);
 
-        JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("(L -> G) ^ (~A -> ~L) ^ A -> G");
-        buttonGroup.add(rdbtnNewRadioButton_1);
-        rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        rdbtnNewRadioButton_1.setBounds(10, 141, 181, 23);
-        frame.getContentPane().add(rdbtnNewRadioButton_1);
-
-        JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("(L -> G) ^ ((~A ^ L) ^ A )-> G");
-        buttonGroup.add(rdbtnNewRadioButton_2);
-        rdbtnNewRadioButton_2.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        rdbtnNewRadioButton_2.setBounds(10, 161, 181, 23);
-        frame.getContentPane().add(rdbtnNewRadioButton_2);
-
-        JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("((L -> A) ^ (~G -> ~L) ^ A) -> G");
-        buttonGroup.add(rdbtnNewRadioButton_3);
-        rdbtnNewRadioButton_3.setFont(new Font("Tahoma", Font.PLAIN, 10));
-        rdbtnNewRadioButton_3.setBounds(10, 181, 181, 23);
-        frame.getContentPane().add(rdbtnNewRadioButton_3);
-
-        JButton btnNewButton = new JButton("Confirmar");
-        btnNewButton.setBounds(213, 141, 89, 43);
-        frame.getContentPane().add(btnNewButton);
+        indicator = new JPanel();
+        indicator.setBounds(324, 0, 10, 10);
+        indicator.setBackground(Color.RED);
+        frame.getContentPane().add(indicator);
 
         super.setJFrame(frame);
+    }
+
+    @Override
+    protected void onConfirm(boolean isCorrect) {
+        confirmButton.setEnabled(!isCorrect);
+        comboBox.setEnabled(!isCorrect);
+
+        indicator.setBackground(isCorrect ? Color.GREEN : Color.RED);
     }
 }

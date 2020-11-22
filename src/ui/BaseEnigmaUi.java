@@ -17,4 +17,6 @@ abstract class BaseEnigmaUi {
     protected JFrame getjFrame() {
         return this.jFrame;
     }
+
+    abstract protected void onConfirm(boolean isCorrect);
 }
