@@ -28,7 +28,7 @@ public class Enigma2LogicaProposicional extends BaseEnigma {
                 "(L -> G) ^ ((~A ^ L) ^ A )-> G",
                 "((L -> A) ^ (~G -> ~L) ^ A) -> G"
         });
-        enigma.setCorrectAnswer(-1); //TODO adicionar resposta certa
+        enigma.setCorrectAnswer(0); //TODO adicionar resposta certa
         super.setEnigma(enigma);
 
         Enigma2ProposicionalUi enigmaUi = new Enigma2ProposicionalUi(this);

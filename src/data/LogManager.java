@@ -1,5 +1,6 @@
 package data;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,9 +22,12 @@ public class LogManager {
         System.setProperty("java.util.logging.SimpleFormatter.format",
                 "%1$tF %1$tT %4$s %2$s %5$s%6$s%n");
 
+        // data
         LocalDateTime now = LocalDateTime.now();
+        // formatando data
         DateTimeFormatter nameDtf = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS");
 
+        // setando o nome do arquivo
         String logFileName = "Modulo01_log_" + nameDtf.format(now) + ".log";
         currentFilePath = Paths.get(basePath.toString(), logFileName);
 
