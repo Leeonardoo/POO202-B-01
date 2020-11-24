@@ -9,28 +9,6 @@ public class Modulo01 implements ModuloInterface, ModuleBehaviour {
     private BombaInterface bomba;
     private BaseEnigma enigma;
     private LogManager logManager;
-    private int enigmaIndex = 0;
-
-    public Modulo01(BombaInterface bomba, int enigmaIndex) {
-        this.setEnigmaIndex(enigmaIndex);
-        this.bomba = bomba;
-        this.logManager = new LogManager(bomba.getCaminhoArquivos());
-        this.setEnigma();
-    }
-
-    public Modulo01(byte enigmaIndex) {
-        this.setEnigmaIndex(enigmaIndex);
-        this.setEnigma();
-        this.logManager.addQuantasAtivacoes();
-    }
-
-    public Modulo01() {
-    }
-
-    public void initEnigma(byte enigmaIndex) {
-        this.setEnigmaIndex(enigmaIndex);
-        this.setEnigma();
-    }
 
     @Override
     public int getQuantasAtivacoes() {
@@ -55,15 +33,17 @@ public class Modulo01 implements ModuloInterface, ModuleBehaviour {
     @Override
     public void conectarBomba(BombaInterface bombaInterface) {
         this.bomba = bombaInterface;
+        this.logManager = new LogManager(bombaInterface.getCaminhoArquivos());
     }
 
     @Override
     public JPanel getPainelModulo(byte b) {
+        setEnigmaById(b);
         return enigma.getUi();
     }
 
-    private void setEnigma() {
-        switch (enigmaIndex) {
+    private void setEnigmaById(byte b) {
+        switch (b) {
             case 0:
                 this.enigma = new Enigma1Logica(this);
                 break;
@@ -84,18 +64,12 @@ public class Modulo01 implements ModuloInterface, ModuleBehaviour {
 
     @Override
     public void notifyError() {
-        this.logManager.addQuantosErrosCometidosEnigma((byte) enigmaIndex);
         bomba.addErro();
     }
 
     @Override
     public void notifyResolved() {
-        this.logManager.addQuantasRespostasCorretasEnigma((byte) enigmaIndex);
         bomba.informarDesarme(this);
-    }
-
-    private void setEnigmaIndex(int enigmaIndex) {
-        this.enigmaIndex = enigmaIndex;
     }
 
     @Override
