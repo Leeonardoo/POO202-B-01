@@ -4,7 +4,7 @@ import enigma.*;
 
 import javax.swing.*;
 
-public class Modulo01 implements ModuloInterface, ModuleBehaviour {
+public class ModuloB01 implements ModuloInterface, ModuleBehaviour {
 
     private BombaInterface bomba;
     private BaseEnigma enigma;
@@ -16,13 +16,18 @@ public class Modulo01 implements ModuloInterface, ModuleBehaviour {
     }
 
     @Override
-    public int getQuantasExecucoes(byte b) {
-        return logManager.getQuantasExecucoesEnigma(b);
+    public int getQuantasExecucoes(byte enigmaIndex) {
+        return logManager.getQuantasExecucoesEnigma(enigmaIndex);
     }
 
     @Override
-    public int getQuantasRespostasCorretas(byte b) {
-        return logManager.getQuantasRespostasCorretasEnigma(b);
+    public int getQuantasRespostasCorretas(byte enigmaIndex) {
+        return logManager.getQuantasRespostasCorretasEnigma(enigmaIndex);
+    }
+
+    @Override
+    public int getQuantosErrosCometidos(byte enigmaIndex) {
+        return logManager.getQuantosErrosCometidosEnigma(enigmaIndex);
     }
 
     @Override
@@ -38,13 +43,13 @@ public class Modulo01 implements ModuloInterface, ModuleBehaviour {
     }
 
     @Override
-    public JPanel getPainelModulo(byte b) {
-        setEnigmaById(b);
+    public JPanel getPainelModulo(byte enigmaIndex) {
+        setEnigmaById(enigmaIndex);
         return enigma.getUi();
     }
 
-    private void setEnigmaById(byte b) {
-        switch (b) {
+    private void setEnigmaById(byte enigmaIndex) {
+        switch (enigmaIndex) {
             case 1:
                 this.enigma = new Enigma1Logica(this);
                 break;

@@ -15,7 +15,7 @@ public class FakeBomb implements BombaInterface {
      */
     public FakeBomb() {
         this.enigmaIndex = (byte) new Random().nextInt((4));
-        this.modulo01 = new Modulo01();
+        this.modulo01 = new ModuloB01();
         modulo01.conectarBomba(this);
         initialize();
     }

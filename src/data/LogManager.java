@@ -1,25 +1,16 @@
 package data;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 //TODO
 public class LogManager {
 
-    private final Path currentFilePath;
-    private final Logger logger = Logger.getLogger("Modulo01");
+    //private final Path currentFilePath;
+    //private final Logger logger = Logger.getLogger("Modulo01");
 
     public LogManager(Path basePath) {
         //Define o formato padrão dos logs
-        System.setProperty("java.util.logging.SimpleFormatter.format",
+        /*System.setProperty("java.util.logging.SimpleFormatter.format",
                 "%1$tF %1$tT %4$s %2$s %5$s%6$s%n");
 
         // data
@@ -46,7 +37,7 @@ public class LogManager {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public int getQuantasAtivacoes() {
