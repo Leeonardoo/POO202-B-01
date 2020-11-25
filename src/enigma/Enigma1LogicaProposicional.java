@@ -9,11 +9,11 @@ public class Enigma1LogicaProposicional extends BaseEnigma {
     public Enigma1LogicaProposicional(ModuleBehaviour modulo) {
         super(modulo);
         Enigma enigma = new Enigma();
-        enigma.setId(2);
-        enigma.setText("<html>Dada a disjunÃ§Ã£o exclusiva â€œOu Ana Ã© advogada<br>ou Bianca Ã© professora (P âŠ» Q)â€�, escolha entre<br>as alternativas a sua negaÃ§Ã£o.</html>");
+        enigma.setId(3);
+        enigma.setText("<html>Dada a disjunção exclusiva \u201COu Ana é advogada<br>ou Bianca é professora (P ⊻ Q)\u201D, escolha entre<br>as alternativas a sua negação.</html>");
         enigma.setOptions(new String[]{
-                "<html>A) \u201CSe Ana \u00E9 advogada, ent\u00E3o Bianca \u00E9 professora.\u201D (P \u2192 Q)</html>",
-                "<html>B) \u201CSe Bianca n\u00E3o \u00E9 advogada ent\u00E3o Ana \u00E9 professora.\u201D (\u00ACR \u2192 S)</html>",
+                "<html>A) \u201CSe Ana \u00E9 advogada, então Bianca é professora.\u201D (P \u2192 Q)</html>",
+                "<html>B) \u201CSe Bianca não é advogada então Ana é professora.\u201D (\u00ACR \u2192 S)</html>",
                 "<html>C) \u201CAna \u00E9 advogada se, e somente se, Bianca \u00E9 professora.\u201D (P \u2194 Q)</html>",
                 "<html>D) \u201CSe Bianca \u00E9 advogada, ent\u00E3o Ana \u00E9 professora.\u201D (R \u2192 S)</html>"
         });

@@ -8,13 +8,13 @@ public class FakeBomb implements BombaInterface {
 
     private final ModuloInterface modulo01;
     private JFrame frame;
-    private int enigmaIndex;
+    private byte enigmaIndex;
 
     /**
      * Create the application.
      */
     public FakeBomb() {
-        this.enigmaIndex = new Random().nextInt((4));
+        this.enigmaIndex = (byte) new Random().nextInt((4));
         this.modulo01 = new Modulo01();
         modulo01.conectarBomba(this);
         initialize();
@@ -43,7 +43,7 @@ public class FakeBomb implements BombaInterface {
         frame = new JFrame();
         frame.setBounds(100, 100, 350, 250);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(modulo01.getPainelModulo((byte) enigmaIndex));
+        frame.add(modulo01.getPainelModulo(enigmaIndex));
     }
 
 

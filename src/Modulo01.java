@@ -34,6 +34,7 @@ public class Modulo01 implements ModuloInterface, ModuleBehaviour {
     public void conectarBomba(BombaInterface bombaInterface) {
         this.bomba = bombaInterface;
         this.logManager = new LogManager(bombaInterface.getCaminhoArquivos());
+        this.logManager.addQuantasAtivacoes();
     }
 
     @Override
@@ -44,19 +45,19 @@ public class Modulo01 implements ModuloInterface, ModuleBehaviour {
 
     private void setEnigmaById(byte b) {
         switch (b) {
-            case 0:
+            case 1:
                 this.enigma = new Enigma1Logica(this);
                 break;
 
-            case 1:
+            case 2:
                 this.enigma = new Enigma2Logica(this);
                 break;
 
-            case 2:
+            case 3:
                 this.enigma = new Enigma1LogicaProposicional(this);
                 break;
 
-            case 3:
+            case 4:
                 this.enigma = new Enigma2LogicaProposicional(this);
                 break;
         }

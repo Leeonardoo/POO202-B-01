@@ -42,13 +42,13 @@ public abstract class BaseEnigma implements EnigmaInterface {
     }
 
     public void registerError() {
-        getModulo().getLogManager().addQuantosErrosCometidosEnigma(getEnigma().getId());
+        getModulo().getLogManager().addQuantosErrosCometidosEnigma((byte) getEnigma().getId());
         setResolved(false);
         getModulo().notifyError();
     }
 
     public void registerCorrectAnswer() {
-        getModulo().getLogManager().addQuantasRespostasCorretasEnigma(getEnigma().getId());
+        getModulo().getLogManager().addQuantasRespostasCorretasEnigma((byte) getEnigma().getId());
         setResolved(true);
         getModulo().notifyResolved();
     }

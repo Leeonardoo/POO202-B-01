@@ -10,7 +10,7 @@ public class Enigma2LogicaProposicional extends BaseEnigma {
     public Enigma2LogicaProposicional(ModuleBehaviour modulo) {
         super(modulo);
         Enigma enigma = new Enigma();
-        enigma.setId(3);
+        enigma.setId(4);
         enigma.setText("<html>" +
                 "Dada a sentença abaixo:<br>" +
                 "Se o lutador treina bem, ele ganha. Se o lutador não se<br>" +
