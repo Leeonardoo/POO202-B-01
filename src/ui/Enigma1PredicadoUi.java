@@ -1,34 +1,23 @@
 package ui;
 
+import callback.EnigmaInterface;
+
 import java.awt.*;
 
 import javax.swing.*;
 
-public class Enigma1PredicadoUi {
+public class Enigma1PredicadoUi extends BaseEnigmaUi {
 
+	private final EnigmaInterface enigmaCallback;
 	private JFrame frame;
 	private JPanel indicator;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Enigma1PredicadoUi window = new Enigma1PredicadoUi();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JButton btnNewButtonA, btnNewButtonB, btnNewButtonC, btnNewButtonD;
 
 	/**
 	 * Create the application.
 	 */
-	public Enigma1PredicadoUi() {
+	public Enigma1PredicadoUi(EnigmaInterface enigmaCallback) {
+		this.enigmaCallback = enigmaCallback;
 		initialize();
 	}
 
@@ -46,32 +35,59 @@ public class Enigma1PredicadoUi {
 		indicator.setBackground(Color.RED);
 		frame.getContentPane().add(indicator);
 		
-		JButton btnNewButton = new JButton("(Ex) (Ay) (jogador(x) ^ boxeador(y) -> Perde(x,y)");
-		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 10));
-		btnNewButton.setBounds(9, 101, 334, 23);
-		frame.getContentPane().add(btnNewButton);
+		btnNewButtonA = new JButton(enigmaCallback.getEnigma().getOptions()[0]);
+		btnNewButtonA.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnNewButtonA.setBounds(9, 101, 334, 23);
+		btnNewButtonA.addActionListener(e -> {
+			onConfirm(enigmaCallback.onUserConfirm(0));
+		});
+		frame.getContentPane().add(btnNewButtonA);
 		
-		JButton btnNewButton_1 = new JButton("(Ey) (Ax) (jogador(x) ^ boxeador(y) -> Perde(x,y)");
-		btnNewButton_1.setFont(new Font("Dialog", Font.BOLD, 10));
-		btnNewButton_1.setBounds(9, 131, 334, 23);
-		frame.getContentPane().add(btnNewButton_1);
+		btnNewButtonB = new JButton(enigmaCallback.getEnigma().getOptions()[1]);
+		btnNewButtonB.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnNewButtonB.setBounds(9, 131, 334, 23);
+		btnNewButtonB.addActionListener(e -> {
+			onConfirm(enigmaCallback.onUserConfirm(1));
+		});
+		frame.getContentPane().add(btnNewButtonB);
 		
-		JButton btnNewButton_2 = new JButton("(Ex) (Ay) (jogador(y) ^ boxeador(x) -> Perde(x,y)");
-		btnNewButton_2.setFont(new Font("Dialog", Font.BOLD, 10));
-		btnNewButton_2.setBounds(9, 159, 334, 23);
-		frame.getContentPane().add(btnNewButton_2);
+		btnNewButtonC = new JButton(enigmaCallback.getEnigma().getOptions()[2]);
+		btnNewButtonC.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnNewButtonC.setBounds(9, 159, 334, 23);
+		btnNewButtonC.addActionListener(e -> {
+			onConfirm(enigmaCallback.onUserConfirm(2));
+		});
+		frame.getContentPane().add(btnNewButtonC);
 		
-		JButton btnNewButton_3 = new JButton("(Ex) (Ay) (jogador(x) ^ boxeador(y) -> Perde(y,y)");
-		btnNewButton_3.setFont(new Font("Dialog", Font.BOLD, 10));
-		btnNewButton_3.setBounds(9, 187, 334, 23);
-		frame.getContentPane().add(btnNewButton_3);
+		btnNewButtonD = new JButton(enigmaCallback.getEnigma().getOptions()[3]);
+		btnNewButtonD.setFont(new Font("Dialog", Font.BOLD, 10));
+		btnNewButtonD.setBounds(9, 187, 334, 23);
+		btnNewButtonD.addActionListener(e -> {
+			onConfirm(enigmaCallback.onUserConfirm(3));
+		});
+		frame.getContentPane().add(btnNewButtonD);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(13, 11, 326, 81);
 		frame.getContentPane().add(scrollPane);
 		
-		JLabel lblNewLabel = new JLabel("<html>Dada a senten\u00E7a: <br>\r\n\"Um Jogador perde para todos os boxeadores\" <br><br>\r\nSelecione a formula correta:\r\n</html>\r\n");
+		JLabel lblNewLabel = new JLabel(enigmaCallback.getEnigma().getText());
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 11));
 		scrollPane.setViewportView(lblNewLabel);
+
+		super.setJFrame(frame);
+	}
+
+	@Override
+	protected void onConfirm(boolean isCorrect) {
+		if (isCorrect) {
+			indicator.setBackground(Color.GREEN);
+			btnNewButtonA.setEnabled(false);
+			btnNewButtonB.setEnabled(false);
+			btnNewButtonC.setEnabled(false);
+			btnNewButtonD.setEnabled(false);
+		} else {
+			indicator.setBackground(Color.RED);
+		}
 	}
 }

@@ -1,81 +1,106 @@
 package ui;
 
+import callback.EnigmaInterface;
+import enigma.BaseEnigma;
+
 import java.awt.*;
+import java.util.Enumeration;
 
 import javax.swing.*;
 
-public class Enigma2PredicadoUi {
+public class Enigma2PredicadoUi extends BaseEnigmaUi {
 
-	private JFrame frame;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JPanel indicator;
+    private final EnigmaInterface enigmaCallback;
+    private JFrame frame;
+    private final ButtonGroup buttonGroup = new ButtonGroup();
+    private JPanel indicator;
+    JButton confirmButton;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Enigma2PredicadoUi window = new Enigma2PredicadoUi();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    /**
+     * Create the application.
+     */
+    public Enigma2PredicadoUi(EnigmaInterface enigmaCallback) {
+        this.enigmaCallback = enigmaCallback;
+        initialize();
+    }
 
-	/**
-	 * Create the application.
-	 */
-	public Enigma2PredicadoUi() {
-		initialize();
-	}
+    /**
+     * Initialize the contents of the frame.
+     */
+    private void initialize() {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 350, 250);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(null);
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 350, 250);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 13, 328, 115);
-		frame.getContentPane().add(scrollPane);
-		
-		JLabel lblNewLabel = new JLabel("<html>jornalista(x) = x é jornalista<br>\r\nformado(x) = x é formado<br>\r\n<br>\r\n1 - Todos são formados<br>\r\n2 - Todo Jornalista é formado<br>\r\n3 - Alguns são formados, alguns não são<br>\r\n4 - Nem todo jornalista é formado<br>\r\n<br>\r\n\r\n( ) (Ax)(jornalista(x) -> formado(x))<br>\r\n( ) -((Ex)(jornalista(x) -> formado(x)))<br>\r\n( ) (Ax)(formado(x))<br>\r\n( ) (Ex)(formado(x))) ^(Ex)(-formado(x))<br>\r\n<br>\r\nAssinale a alternativa que corresponde ao<br>relacionamento entre as sentenças abaixo:</html>");
-		scrollPane.setViewportView(lblNewLabel);
-		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("2,1,3,4");
-		buttonGroup.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setBounds(10, 133, 100, 23);
-		frame.getContentPane().add(rdbtnNewRadioButton);
-		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("2,4,1,3");
-		buttonGroup.add(rdbtnNewRadioButton_1);
-		rdbtnNewRadioButton_1.setBounds(10, 170, 100, 23);
-		frame.getContentPane().add(rdbtnNewRadioButton_1);
-		
-		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("1,2,3,4");
-		buttonGroup.add(rdbtnNewRadioButton_2);
-		rdbtnNewRadioButton_2.setBounds(106, 133, 100, 23);
-		frame.getContentPane().add(rdbtnNewRadioButton_2);
-		
-		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("3,4,1,2");
-		buttonGroup.add(rdbtnNewRadioButton_3);
-		rdbtnNewRadioButton_3.setBounds(106, 170, 100, 23);
-		frame.getContentPane().add(rdbtnNewRadioButton_3);
-		
-		JButton btnNewButton = new JButton("Confirmar");
-		btnNewButton.setBounds(214, 143, 124, 46);
-		frame.getContentPane().add(btnNewButton);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(12, 13, 328, 115);
+        frame.getContentPane().add(scrollPane);
 
-		indicator = new JPanel();
-		indicator.setBounds(324, 0, 10, 10);
-		indicator.setBackground(Color.RED);
-		frame.getContentPane().add(indicator);
-	}
+        JLabel lblNewLabel = new JLabel(enigmaCallback.getEnigma().getText());
+        scrollPane.setViewportView(lblNewLabel);
+
+        String[] options = enigmaCallback.getEnigma().getOptions();
+
+        JRadioButton rdbtnNewRadioButton = new JRadioButton(enigmaCallback.getEnigma().getOptions()[0]);
+        rdbtnNewRadioButton.setActionCommand("0");
+        buttonGroup.add(rdbtnNewRadioButton);
+        rdbtnNewRadioButton.setBounds(10, 133, 100, 23);
+        frame.getContentPane().add(rdbtnNewRadioButton);
+
+        JRadioButton rdbtnNewRadioButton_1 = new JRadioButton(enigmaCallback.getEnigma().getOptions()[1]); //
+        rdbtnNewRadioButton_1.setActionCommand("1");
+        buttonGroup.add(rdbtnNewRadioButton_1);
+        rdbtnNewRadioButton_1.setBounds(10, 170, 100, 23);
+        frame.getContentPane().add(rdbtnNewRadioButton_1);
+
+        JRadioButton rdbtnNewRadioButton_2 = new JRadioButton(enigmaCallback.getEnigma().getOptions()[2]);
+        rdbtnNewRadioButton_2.setActionCommand("2");
+        buttonGroup.add(rdbtnNewRadioButton_2);
+        rdbtnNewRadioButton_2.setBounds(106, 133, 100, 23);
+        frame.getContentPane().add(rdbtnNewRadioButton_2);
+
+        JRadioButton rdbtnNewRadioButton_3 = new JRadioButton(enigmaCallback.getEnigma().getOptions()[3]);
+        rdbtnNewRadioButton_3.setActionCommand("3");
+        buttonGroup.add(rdbtnNewRadioButton_3);
+        rdbtnNewRadioButton_3.setBounds(106, 170, 100, 23);
+        frame.getContentPane().add(rdbtnNewRadioButton_3);
+
+        confirmButton = new JButton("Confirmar");
+        confirmButton.setBounds(214, 143, 124, 46);
+        confirmButton.addActionListener(e -> {
+            if (buttonGroup.getSelection() != null &&
+                    buttonGroup.getSelection().getActionCommand() != null &&
+                    !buttonGroup.getSelection().getActionCommand().isEmpty()
+            ) {
+                onConfirm(enigmaCallback.onUserConfirm(Integer.parseInt(buttonGroup.getSelection().getActionCommand())));
+            } else {
+                //se não tem nenhum selecionado, já está errado
+                onConfirm(enigmaCallback.onUserConfirm(-1));
+            }
+        });
+        frame.getContentPane().add(confirmButton);
+
+        indicator = new JPanel();
+        indicator.setBounds(324, 0, 10, 10);
+        indicator.setBackground(Color.RED);
+        frame.getContentPane().add(indicator);
+
+        super.setJFrame(frame);
+    }
+
+    @Override
+    protected void onConfirm(boolean isCorrect) {
+        confirmButton.setEnabled(!isCorrect);
+
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements(); ) {
+            AbstractButton button = buttons.nextElement();
+            button.setEnabled(!isCorrect);
+        }
+
+        if (isCorrect)
+            indicator.setBackground(Color.GREEN);
+        else
+            indicator.setBackground(Color.RED);
+    }
 }

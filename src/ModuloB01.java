@@ -1,6 +1,7 @@
 import callback.ModuleBehaviour;
 import data.LogManager;
 import enigma.*;
+import ui.Enigma1PredicadoUi;
 
 import javax.swing.*;
 
@@ -64,6 +65,14 @@ public class ModuloB01 implements ModuloInterface, ModuleBehaviour {
 
             case 4:
                 this.enigma = new Enigma2LogicaProposicional(this);
+                break;
+
+            case 5:
+                this.enigma = new Enigma1Predicado(this);
+                break;
+
+            case 6:
+                this.enigma = new Enigma2Predicado(this);
                 break;
         }
     }
