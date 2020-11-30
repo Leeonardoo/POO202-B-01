@@ -1,6 +1,8 @@
 package model;
 
-public class StatsEntry {
+import java.io.Serializable;
+
+public class StatsEntry implements Serializable{
     private int enigmaId, totalActivations, totalExecutions, totalRightAnswers, totalWrongAnswers;
 
     public int getTotalActivations() {
