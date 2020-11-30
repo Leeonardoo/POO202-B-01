@@ -26,6 +26,7 @@ public class LogManager {
 			
 			ObjectOutputStream objOutPut = new ObjectOutputStream(new FileOutputStream(arq));
 			objOutPut.writeObject(entry);
+			objOutPut.flush();
 			objOutPut.close();
 			
 		} catch (Exception e) {
@@ -42,8 +43,8 @@ public class LogManager {
 				lista = (ArrayList<Object>)objInput.readObject();
 				objInput.close();
 			}
-		} catch (Exception erro1) {
-			System.out.printf("Erro: %s", erro1.getMessage());
+		} catch (Exception e) {
+			System.out.printf("Erro: %s", e.getMessage());
 		}
 		return lista;
 	}
