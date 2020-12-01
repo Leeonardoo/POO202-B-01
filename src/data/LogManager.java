@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.Enigma;
 import model.StatsEntry;
 
 public class LogManager {
@@ -40,10 +41,13 @@ public class LogManager {
             System.err.println("Erro ao criar os arquivos do módulo!");
         }
 
-        writeObject(new StatsEntry(1, 1, 1, 1));
+        StatsEntry ste = readObject().get(path);
+        writeObject(new StatsEntry(ste.getEnigmaId(),ste.getTotalExecutions(), 
+        		ste.getTotalRightAnswers(), ste.getTotalWrongAnswers()));
     }
 
     public int getQuantasAtivacoes() {
+    	
         return 1;
     }
 
@@ -71,7 +75,7 @@ public class LogManager {
     }
 
     public void addQuantosErrosCometidosEnigma(byte enigma) {
-
+     
     }
 
     public void writeObject(StatsEntry entry) {
