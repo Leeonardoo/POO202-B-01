@@ -2,7 +2,6 @@ package data;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import model.StatsEntry;
 
 public class Main {
@@ -11,7 +10,7 @@ public class Main {
 		
 		int enigmaId, totalActivations, totalExecutions, totalRightAnswers, totalWrongAnswers;
 		StatsEntry st = new StatsEntry();
-		ArrayList<Object> entry = LogManager.lerArquivoBinario("dados.dat");
+		/*ArrayList<Object> entry = LogManager.lerArquivoBinario("dados.dat");*/
 		
 		
 		enigmaId = st.getEnigmaId();
@@ -26,9 +25,9 @@ public class Main {
 		System.out.printf("Total de Respostas Corretas: ", totalRightAnswers);
 		System.out.printf("Total de Respostas Erradas: ", totalWrongAnswers);
 		
-		entry.add(new StatsEntry()); 
+		/*entry.add(new StatsEntry());
 		
-		LogManager.gravarArquivoBinario(entry, "dados.dat");
+		LogManager.gravarArquivoBinario(entry, "dados.dat");*/
 	}
 
 }
