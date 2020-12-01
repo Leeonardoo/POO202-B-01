@@ -12,11 +12,9 @@ import java.util.Arrays;
 public class Enigma2LogicaUi extends BaseEnigmaUi {
 
     private final EnigmaInterface enigmaCallback;
-    private JTable table;
     private JButton confirmButton;
     private JPanel indicator;
     private JComboBox<String> comboBox_1;
-    private JScrollPane scrollPane;
 
     /**
      * Create the application.
@@ -34,8 +32,8 @@ public class Enigma2LogicaUi extends BaseEnigmaUi {
         frame.setBounds(100, 100, 350, 250);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
-        
-        scrollPane = new JScrollPane();
+
+        JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(10, 11, 314, 72);
         frame.getContentPane().add(scrollPane);
 
@@ -64,7 +62,7 @@ public class Enigma2LogicaUi extends BaseEnigmaUi {
         };
         DefaultTableModel dtm = new DefaultTableModel(itemsArray, new String[]{"", "", ""});
 
-        table = new JTable(dtm) {
+        JTable table = new JTable(dtm) {
             @Override
             public TableCellEditor getCellEditor(int row, int column) {
                 int modelColumn = convertColumnIndexToModel(column);

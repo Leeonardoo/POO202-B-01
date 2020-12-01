@@ -1,14 +1,13 @@
 package data;
 
+import model.StatsEntry;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-
-import model.Enigma;
-import model.StatsEntry;
 
 public class LogManager {
 
@@ -22,7 +21,7 @@ public class LogManager {
         try {
             Path dirPath = Paths.get(path.toUri().resolve("ModuloB01"));
 
-            if (!Files.exists(dirPath)){
+            if (!Files.exists(dirPath)) {
                 Files.createDirectories(dirPath);
             }
 
@@ -40,55 +39,64 @@ public class LogManager {
             e.printStackTrace();
             System.err.println("Erro ao criar os arquivos do módulo!");
         }
-
-        writeObject(new StatsEntry(1,1, 1, 1));
     }
 
+    //TODO
     public int getQuantasAtivacoes() {
-    	StatsEntry entry = readObject().get(this.localModuleFilePath);
-    	entry.getTotalExecutions();
-        return entry.getTotalExecutions();
+        return -1;
     }
 
     public int getQuantasExecucoesEnigma(byte enigma) {
-    	StatsEntry entry = readObject().get(this.localFilePath);
-        return entry.getTotalExecutions();
+        StatsEntry entry = readObject().get(enigma);
+
+        if (entry == null) {
+            return 0;
+        } else {
+            return entry.getTotalExecutions();
+        }
     }
 
     public int getQuantasRespostasCorretasEnigma(byte enigma) {
-    	StatsEntry entry = readObject().get(this.localFilePath);
+        StatsEntry entry = readObject().get(this.localFilePath);
         return entry.getTotalRightAnswers();
     }
 
     public int getQuantosErrosCometidosEnigma(byte enigma) {
-    	StatsEntry entry = readObject().get(this.localFilePath);
+        StatsEntry entry = readObject().get(this.localFilePath);
         return entry.getTotalWrongAnswers();
     }
 
+    //TODO
     public void addQuantasAtivacoes() {
-    	StatsEntry entry = readObject().get(this.localModuleFilePath);
-    	writeObject(entry);
+
     }
 
     public void addQuantasExecucoesEnigma(byte enigma) {
-    	StatsEntry entry = readObject().get(this.localFilePath);
-    	writeObject(entry);
+        StatsEntry entry = readObject().get(enigma);
+
+        if (entry == null) {
+            entry = new StatsEntry(enigma, 1, 0, 0);
+        } else {
+            entry.setTotalExecutions(entry.getTotalExecutions() + 1);
+        }
+
+        writeObject(entry);
     }
 
     public void addQuantasRespostasCorretasEnigma(byte enigma) {
-    	StatsEntry entry = readObject().get(this.localFilePath);
-    	writeObject(entry);
+        StatsEntry entry = readObject().get(this.localFilePath);
+        writeObject(entry);
     }
 
     public void addQuantosErrosCometidosEnigma(byte enigma) {
-    	StatsEntry entry = readObject().get(this.localFilePath);
-    	writeObject(entry);
+        StatsEntry entry = readObject().get(this.localFilePath);
+        writeObject(entry);
     }
 
     public void writeObject(StatsEntry entry) {
         try {
             //Ler arquivo antigo antes, para fazer append
-            Map<Integer, StatsEntry> statsMap = readObject();
+            Map<Byte, StatsEntry> statsMap = readObject();
 
             //Caso nenhum erro aconteceu ao tentar ler o arquivo
             if (statsMap != null) {
@@ -111,8 +119,8 @@ public class LogManager {
     }
 
     @SuppressWarnings("unchecked")
-    public Map<Integer, StatsEntry> readObject() {
-        Map<Integer, StatsEntry> newMap;
+    public Map<Byte, StatsEntry> readObject() {
+        Map<Byte, StatsEntry> newMap;
 
         try {
             ObjectInputStream oldOis = new ObjectInputStream(new FileInputStream(localFilePath.toFile()));
@@ -121,7 +129,7 @@ public class LogManager {
             if (oldFile instanceof Map) {
                 //Assumindo que o Map dentro do arquivo é um Map<Integer, StatsEntry>
                 //Agora livre pra colocar a nova entidade no map
-                newMap = (Map<Integer, StatsEntry>) oldFile;
+                newMap = (Map<Byte, StatsEntry>) oldFile;
             } else {
                 //Se ainda não é um map (primeira execução), um novo é criado
                 newMap = new HashMap<>();

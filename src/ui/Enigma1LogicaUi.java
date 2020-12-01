@@ -4,8 +4,6 @@ import callback.EnigmaInterface;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Enigma1LogicaUi extends BaseEnigmaUi {
 
@@ -32,30 +30,22 @@ public class Enigma1LogicaUi extends BaseEnigmaUi {
         frame.getContentPane().setLayout(null);
 
         btnNewButtonA = new JButton(enigmaCallback.getEnigma().getOptions()[0]);
-        btnNewButtonA.addActionListener(e -> {
-            onConfirm(enigmaCallback.onUserConfirm(0));
-        });
+        btnNewButtonA.addActionListener(e -> onConfirm(enigmaCallback.onUserConfirm(0)));
         btnNewButtonA.setBounds(10, 146, 126, 23);
         frame.getContentPane().add(btnNewButtonA);
 
         btnNewButtonB = new JButton(enigmaCallback.getEnigma().getOptions()[1]);
-        btnNewButtonB.addActionListener(e -> {
-            onConfirm(enigmaCallback.onUserConfirm(1));
-        });
+        btnNewButtonB.addActionListener(e -> onConfirm(enigmaCallback.onUserConfirm(1)));
         btnNewButtonB.setBounds(10, 180, 126, 23);
         frame.getContentPane().add(btnNewButtonB);
 
         btnNewButtonC = new JButton(enigmaCallback.getEnigma().getOptions()[2]);
-        btnNewButtonC.addActionListener(e -> {
-            onConfirm(enigmaCallback.onUserConfirm(2));
-        });
+        btnNewButtonC.addActionListener(e -> onConfirm(enigmaCallback.onUserConfirm(2)));
         btnNewButtonC.setBounds(198, 146, 126, 23);
         frame.getContentPane().add(btnNewButtonC);
 
         btnNewButtonD = new JButton(enigmaCallback.getEnigma().getOptions()[3]);
-        btnNewButtonD.addActionListener(e -> {
-            onConfirm(enigmaCallback.onUserConfirm(3));
-        });
+        btnNewButtonD.addActionListener(e -> onConfirm(enigmaCallback.onUserConfirm(3)));
         btnNewButtonD.setBounds(198, 180, 126, 23);
         frame.getContentPane().add(btnNewButtonD);
 

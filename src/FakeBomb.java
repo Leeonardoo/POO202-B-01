@@ -10,7 +10,7 @@ public class FakeBomb implements BombaInterface {
 
     private final ModuloInterface modulo01;
     private JFrame frame;
-    private byte enigmaIndex;
+    private final byte enigmaIndex;
 
     /**
      * Create the application.
@@ -26,14 +26,12 @@ public class FakeBomb implements BombaInterface {
      * Launch the application.
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    FakeBomb window = new FakeBomb();
-                    window.frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        EventQueue.invokeLater(() -> {
+            try {
+                FakeBomb window = new FakeBomb();
+                window.frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }

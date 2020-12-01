@@ -2,7 +2,6 @@ package enigma;
 
 import callback.ModuleBehaviour;
 import model.Enigma;
-import ui.Enigma1ProposicionalUi;
 import ui.Enigma2ProposicionalUi;
 
 public class Enigma2LogicaProposicional extends BaseEnigma {

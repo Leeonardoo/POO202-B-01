@@ -39,9 +39,7 @@ public class Enigma2ProposicionalUi extends BaseEnigmaUi {
 
         confirmButton = new JButton("Confirmar");
         confirmButton.setBounds(112, 177, 98, 23);
-        confirmButton.addActionListener(arg0 -> {
-            onConfirm(enigmaCallback.onUserConfirm(comboBox.getSelectedIndex()));
-        });
+        confirmButton.addActionListener(arg0 -> onConfirm(enigmaCallback.onUserConfirm(comboBox.getSelectedIndex())));
         frame.getContentPane().add(confirmButton);
         
         JLabel lblNewLabel_1 = new JLabel("Resposta:");

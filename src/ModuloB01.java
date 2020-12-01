@@ -1,7 +1,6 @@
 import callback.ModuleBehaviour;
 import data.LogManager;
 import enigma.*;
-import ui.Enigma1PredicadoUi;
 
 import javax.swing.*;
 
@@ -46,6 +45,7 @@ public class ModuloB01 implements ModuloInterface, ModuleBehaviour {
     @Override
     public JPanel getPainelModulo(byte enigmaIndex) {
         setEnigmaById(enigmaIndex);
+        System.out.println(logManager.getQuantasExecucoesEnigma(enigmaIndex));
         return enigma.getUi();
     }
 

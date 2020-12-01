@@ -1,7 +1,6 @@
 package ui;
 
 import callback.EnigmaInterface;
-import enigma.BaseEnigma;
 
 import java.awt.*;
 import java.util.Enumeration;
@@ -11,7 +10,6 @@ import javax.swing.*;
 public class Enigma2PredicadoUi extends BaseEnigmaUi {
 
     private final EnigmaInterface enigmaCallback;
-    private JFrame frame;
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private JPanel indicator;
     JButton confirmButton;
@@ -28,7 +26,7 @@ public class Enigma2PredicadoUi extends BaseEnigmaUi {
      * Initialize the contents of the frame.
      */
     private void initialize() {
-        frame = new JFrame();
+        JFrame frame = new JFrame();
         frame.setBounds(100, 100, 350, 250);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);

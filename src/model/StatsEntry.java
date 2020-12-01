@@ -3,9 +3,10 @@ package model;
 import java.io.Serializable;
 
 public class StatsEntry implements Serializable{
-    private int enigmaId, totalExecutions, totalRightAnswers, totalWrongAnswers;
+    private int totalExecutions, totalRightAnswers, totalWrongAnswers;
+    private byte enigmaId;
 
-    public StatsEntry(int enigmaId, int totalExecutions, int totalRightAnswers, int totalWrongAnswers) {
+    public StatsEntry(byte enigmaId, int totalExecutions, int totalRightAnswers, int totalWrongAnswers) {
         this.setEnigmaId(enigmaId);
         this.setTotalExecutions(totalExecutions);
         this.setTotalRightAnswers(totalRightAnswers);
@@ -42,11 +43,11 @@ public class StatsEntry implements Serializable{
         this.totalWrongAnswers = totalWrongAnswers;
     }
 
-    public int getEnigmaId() {
+    public byte getEnigmaId() {
         return enigmaId;
     }
 
-    public void setEnigmaId(int enigmaId) {
+    public void setEnigmaId(byte enigmaId) {
         this.enigmaId = enigmaId;
     }
 }
