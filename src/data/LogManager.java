@@ -4,7 +4,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,10 +66,34 @@ public class LogManager {
 
     }
 
-    @SuppressWarnings("unchecked")
-    public void gravarArquivoBinario(StatsEntry entry) {
+    public void writeObject(StatsEntry entry) {
         try {
-            //Ler arquivo antigo para fazer append
+            //Ler arquivo antigo antes, para fazer append
+            Map<Integer, StatsEntry> statsMap = readObject();
+
+            //Caso nenhum erro aconteceu ao tentar ler o arquivo
+            if (statsMap != null) {
+                statsMap.put(entry.getEnigmaId(), entry);
+
+                ObjectOutputStream newOos = new ObjectOutputStream(new FileOutputStream(localFilePath.toFile()));
+                newOos.writeObject(statsMap);
+
+                //Garantindo que os novos dados estão salvos
+                newOos.flush();
+                newOos.close();
+            } else {
+                //Caso ocorreu, não temos um Map e é impossível continuar
+                throw new FileNotFoundException("Ocorreu um erro ao ler o arquivo de dados do módulo!");
+            }
+
+        } catch (Exception e) {
+            System.err.printf("Erro: %s", e.getMessage());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public Map<Integer, StatsEntry> readObject() {
+        try {
             ObjectInputStream oldOis = new ObjectInputStream(new FileInputStream(localFilePath.toFile()));
             Object oldFile = oldOis.readObject();
 
@@ -85,34 +108,13 @@ public class LogManager {
                 newMap = new HashMap<>();
             }
 
-            newMap.put(entry.getEnigmaId(), entry);
-            //Fechando antes de abrir uma nova OutputStream
+            //Fechando antes de abrir uma nova OutputStream no futuro
             oldOis.close();
-
-            ObjectOutputStream newOos = new ObjectOutputStream(new FileOutputStream(localFilePath.toFile()));
-            newOos.writeObject(newMap);
-
-            //Garantindo que os novos dados estão salvos
-            newOos.flush();
-            newOos.close();
+            return newMap;
 
         } catch (Exception e) {
             System.err.printf("Erro: %s", e.getMessage());
+            return null;
         }
-    }
-
-    public Map<Integer, StatsEntry> lerArquivoBinario() {
-
-        try {
-            File arq = new File(nomeArq);
-            if (arq.exists()) {
-                ObjectInputStream objInput = new ObjectInputStream(new FileInputStream(arq));
-                lista = (ArrayList<Object>) objInput.readObject();
-                objInput.close();
-            }
-        } catch (Exception e) {
-            System.out.printf("Erro: %s", e.getMessage());
-        }
-        return lista;
     }
 }
