@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class StatsEntry implements Serializable{
+public class StatsEntry implements Serializable {
     private int totalExecutions, totalRightAnswers, totalWrongAnswers;
     private byte enigmaId;
 

@@ -1,5 +1,6 @@
 package data;
 
+import model.ModuleStats;
 import model.StatsEntry;
 
 import java.io.*;
@@ -41,18 +42,17 @@ public class LogManager {
         }
     }
 
-    //TODO
     public int getQuantasAtivacoes() {
-    	 StatsEntry entry = readObject().get(this.localModuleFilePath);
-         if (entry == null) {
-             return 0;
-         } else {
-             return entry.getTotalExecutions();
-         }
+        ModuleStats currentStats = readModuleStats();
+        if (currentStats == null) {
+            return 0;
+        } else {
+            return currentStats.getTotalActivations();
+        }
     }
 
     public int getQuantasExecucoesEnigma(byte enigma) {
-        StatsEntry entry = readObject().get(enigma);
+        StatsEntry entry = readStats().get(enigma);
 
         if (entry == null) {
             return 0;
@@ -62,39 +62,39 @@ public class LogManager {
     }
 
     public int getQuantasRespostasCorretasEnigma(byte enigma) {
-    	   StatsEntry entry = readObject().get(enigma);
+        StatsEntry entry = readStats().get(enigma);
 
-           if (entry == null) {
-               return 0;
-           } else {
-               return entry.getTotalRightAnswers();
-           }
+        if (entry == null) {
+            return 0;
+        } else {
+            return entry.getTotalRightAnswers();
+        }
     }
 
     public int getQuantosErrosCometidosEnigma(byte enigma) {
-    	   StatsEntry entry = readObject().get(enigma);
+        StatsEntry entry = readStats().get(enigma);
 
-           if (entry == null) {
-               return 0;
-           } else {
-               return entry.getTotalWrongAnswers();
-           }
+        if (entry == null) {
+            return 0;
+        } else {
+            return entry.getTotalWrongAnswers();
+        }
     }
 
-    //TODO
     public void addQuantasAtivacoes() {
-    	 StatsEntry entry = readObject().get(this.localModuleFilePath);
-    	 if (entry == null) {
-             entry = new StatsEntry(entry.getEnigmaId(), 1, 0, 0);
-         } else {
-             entry.setTotalExecutions(entry.getTotalExecutions() + 1);
-         }
+        ModuleStats currentStats = readModuleStats();
+        if (currentStats == null) {
+            currentStats = new ModuleStats();
+            currentStats.setTotalActivations(1);
+        } else {
+            currentStats.setTotalActivations(currentStats.getTotalActivations() + 1);
+        }
 
-         writeObject(entry);
+        writeModuleStats(currentStats);
     }
 
     public void addQuantasExecucoesEnigma(byte enigma) {
-        StatsEntry entry = readObject().get(enigma);
+        StatsEntry entry = readStats().get(enigma);
 
         if (entry == null) {
             entry = new StatsEntry(enigma, 1, 0, 0);
@@ -102,23 +102,23 @@ public class LogManager {
             entry.setTotalExecutions(entry.getTotalExecutions() + 1);
         }
 
-        writeObject(entry);
+        writeStats(entry);
     }
 
     public void addQuantasRespostasCorretasEnigma(byte enigma) {
-    	 StatsEntry entry = readObject().get(enigma);
+        StatsEntry entry = readStats().get(enigma);
 
-         if (entry == null) {
-             entry = new StatsEntry(enigma, 1, 1, 0);
-         } else {
-             entry.setTotalRightAnswers(entry.getTotalRightAnswers() + 1);
-         }
+        if (entry == null) {
+            entry = new StatsEntry(enigma, 1, 1, 0);
+        } else {
+            entry.setTotalRightAnswers(entry.getTotalRightAnswers() + 1);
+        }
 
-         writeObject(entry);
+        writeStats(entry);
     }
 
     public void addQuantosErrosCometidosEnigma(byte enigma) {
-    	StatsEntry entry = readObject().get(enigma);
+        StatsEntry entry = readStats().get(enigma);
 
         if (entry == null) {
             entry = new StatsEntry(enigma, 1, 0, 1);
@@ -126,13 +126,14 @@ public class LogManager {
             entry.setTotalWrongAnswers(entry.getTotalWrongAnswers() + 1);
         }
 
-        writeObject(entry);;
+        writeStats(entry);
+        ;
     }
 
-    public void writeObject(StatsEntry entry) {
+    private void writeStats(StatsEntry entry) {
         try {
             //Ler arquivo antigo antes, para fazer append
-            Map<Byte, StatsEntry> statsMap = readObject();
+            Map<Byte, StatsEntry> statsMap = readStats();
 
             //Caso nenhum erro aconteceu ao tentar ler o arquivo
             if (statsMap != null) {
@@ -155,7 +156,7 @@ public class LogManager {
     }
 
     @SuppressWarnings("unchecked")
-    public Map<Byte, StatsEntry> readObject() {
+    private Map<Byte, StatsEntry> readStats() {
         Map<Byte, StatsEntry> newMap;
 
         try {
@@ -181,7 +182,59 @@ public class LogManager {
             e.printStackTrace();
             System.err.println("Ocorreu um erro ao ler o arquivo de dados dos enigmas!");
         }
-
         return newMap;
+    }
+
+    public void writeModuleStats(ModuleStats stats) {
+        try {
+            ModuleStats oldStats;
+
+            //Caso nenhum erro aconteceu ao tentar ler o arquivo
+            if (stats != null) {
+                oldStats = stats;
+            } else {
+                oldStats = new ModuleStats();
+            }
+
+            ObjectOutputStream newOos = new ObjectOutputStream(new FileOutputStream(localModuleFilePath.toFile()));
+            newOos.writeObject(oldStats);
+
+            //Garantindo que os novos dados estão salvos
+            newOos.flush();
+            newOos.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Ocorreu um erro ao escrever o arquivo de dados do módulo!");
+        }
+    }
+
+    public ModuleStats readModuleStats() {
+        ModuleStats newStats;
+
+        try {
+            ObjectInputStream oldOis = new ObjectInputStream(new FileInputStream(localModuleFilePath.toFile()));
+            Object oldFile = oldOis.readObject();
+
+            if (oldFile instanceof ModuleStats) {
+                //Assumindo que o Map dentro do arquivo é um Map<Integer, StatsEntry>
+                //Agora livre pra colocar a nova entidade no map
+                newStats = (ModuleStats) oldFile;
+            } else {
+                //Se ainda não é um map (primeira execução), um novo é criado
+                newStats = new ModuleStats();
+            }
+
+            //Fechando antes de abrir uma nova OutputStream no futuro
+            oldOis.close();
+
+        } catch (EOFException e) {
+            newStats = new ModuleStats();
+        } catch (Exception e) {
+            newStats = new ModuleStats();
+            e.printStackTrace();
+            System.err.println("Ocorreu um erro ao ler o arquivo de dados do módulo!");
+        }
+        return newStats;
     }
 }

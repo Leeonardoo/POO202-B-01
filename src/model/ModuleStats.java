@@ -1,6 +1,8 @@
 package model;
 
-public class ModuleStats {
+import java.io.Serializable;
+
+public class ModuleStats implements Serializable {
     private int totalActivations;
 
     public int getTotalActivations() {
