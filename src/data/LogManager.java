@@ -43,7 +43,12 @@ public class LogManager {
 
     //TODO
     public int getQuantasAtivacoes() {
-        return 0;
+    	 StatsEntry entry = readObject().get(this.localModuleFilePath);
+         if (entry == null) {
+             return 0;
+         } else {
+             return entry.getTotalExecutions();
+         }
     }
 
     public int getQuantasExecucoesEnigma(byte enigma) {
@@ -78,6 +83,14 @@ public class LogManager {
 
     //TODO
     public void addQuantasAtivacoes() {
+    	 StatsEntry entry = readObject().get(this.localModuleFilePath);
+    	 if (entry == null) {
+             entry = new StatsEntry(entry.getEnigmaId(), 1, 0, 0);
+         } else {
+             entry.setTotalExecutions(entry.getTotalExecutions() + 1);
+         }
+
+         writeObject(entry);
     }
 
     public void addQuantasExecucoesEnigma(byte enigma) {
