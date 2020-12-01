@@ -41,41 +41,48 @@ public class LogManager {
             System.err.println("Erro ao criar os arquivos do módulo!");
         }
 
-        StatsEntry ste = readObject().get(path);
-        writeObject(new StatsEntry(ste.getEnigmaId(),ste.getTotalExecutions(), 
-        		ste.getTotalRightAnswers(), ste.getTotalWrongAnswers()));
+        writeObject(new StatsEntry(1,1, 1, 1));
     }
 
     public int getQuantasAtivacoes() {
-    	
-        return 1;
+    	StatsEntry entry = readObject().get(this.localModuleFilePath);
+    	entry.getTotalExecutions();
+        return entry.getTotalExecutions();
     }
 
     public int getQuantasExecucoesEnigma(byte enigma) {
-        return 1;
+    	StatsEntry entry = readObject().get(this.localFilePath);
+        return entry.getTotalExecutions();
     }
 
     public int getQuantasRespostasCorretasEnigma(byte enigma) {
-        return 1;
+    	StatsEntry entry = readObject().get(this.localFilePath);
+        return entry.getTotalRightAnswers();
     }
 
     public int getQuantosErrosCometidosEnigma(byte enigma) {
-        return 1;
+    	StatsEntry entry = readObject().get(this.localFilePath);
+        return entry.getTotalWrongAnswers();
     }
 
     public void addQuantasAtivacoes() {
+    	StatsEntry entry = readObject().get(this.localModuleFilePath);
+    	writeObject(entry);
     }
 
     public void addQuantasExecucoesEnigma(byte enigma) {
-
+    	StatsEntry entry = readObject().get(this.localFilePath);
+    	writeObject(entry);
     }
 
     public void addQuantasRespostasCorretasEnigma(byte enigma) {
-
+    	StatsEntry entry = readObject().get(this.localFilePath);
+    	writeObject(entry);
     }
 
     public void addQuantosErrosCometidosEnigma(byte enigma) {
-     
+    	StatsEntry entry = readObject().get(this.localFilePath);
+    	writeObject(entry);
     }
 
     public void writeObject(StatsEntry entry) {
