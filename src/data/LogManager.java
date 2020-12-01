@@ -21,6 +21,11 @@ public class LogManager {
         try {
             Path dirPath = Paths.get(path.toUri().resolve("ModuloB01"));
 
+            //Se o [...pathBomba...] não existir
+            if (!Files.exists(path)) {
+                Files.createDirectories(path);
+            }
+
             //Se o [...pathBomba...]/ModuloB01 não existir
             if (!Files.exists(localFilePath)) {
                 //Se o [...pathBomba...]/ModuloB01/data.dat não existir

@@ -8,9 +8,9 @@ public class Main {
 
 	public static void main(String[] args) throws IOException  {
 		
-		int enigmaId, totalActivations, totalExecutions, totalRightAnswers, totalWrongAnswers;
+		/*int enigmaId, totalActivations, totalExecutions, totalRightAnswers, totalWrongAnswers;
 		StatsEntry st = new StatsEntry();
-		/*ArrayList<Object> entry = LogManager.lerArquivoBinario("dados.dat");*/
+		*//*ArrayList<Object> entry = LogManager.lerArquivoBinario("dados.dat");*//*
 		
 		
 		enigmaId = st.getEnigmaId();
@@ -23,7 +23,7 @@ public class Main {
 		System.out.printf("Total de Ativações: ", totalActivations);
 		System.out.printf("Total de Execuções: ", totalExecutions);
 		System.out.printf("Total de Respostas Corretas: ", totalRightAnswers);
-		System.out.printf("Total de Respostas Erradas: ", totalWrongAnswers);
+		System.out.printf("Total de Respostas Erradas: ", totalWrongAnswers);*/
 		
 		/*entry.add(new StatsEntry());
 		
