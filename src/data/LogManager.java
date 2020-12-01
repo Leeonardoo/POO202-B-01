@@ -21,19 +21,12 @@ public class LogManager {
         try {
             Path dirPath = Paths.get(path.toUri().resolve("ModuloB01"));
 
-            //Se o [...pathBomba...] não existir
-            if (!Files.exists(path)) {
-                Files.createDirectories(path);
+            if (!Files.exists(dirPath)){
+                Files.createDirectories(dirPath);
             }
 
-            //Se o [...pathBomba...]/ModuloB01 não existir
+            //Se o [...pathBomba...]/ModuloB01/data.dat não existir
             if (!Files.exists(localFilePath)) {
-                //Se o [...pathBomba...]/ModuloB01/data.dat não existir
-                if (!Files.exists(dirPath)) {
-                    //Criando diretório do módulo
-                    Files.createDirectories(dirPath);
-                }
-
                 //Criando arquivo onde os dados vão ficar
                 Files.createFile(localFilePath);
             }
@@ -44,10 +37,10 @@ public class LogManager {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.printf("Erro ao criar os arquivos do módulo!: %s", e.getMessage());
+            System.err.println("Erro ao criar os arquivos do módulo!");
         }
 
-        writeObject(new StatsEntry(1,1,1,1));
+        writeObject(new StatsEntry(1, 1, 1, 1));
     }
 
     public int getQuantasAtivacoes() {
@@ -90,7 +83,7 @@ public class LogManager {
             if (statsMap != null) {
                 statsMap.put(entry.getEnigmaId(), entry);
             } else {
-                statsMap = new HashMap<Integer, StatsEntry>();
+                statsMap = new HashMap<>();
             }
 
             ObjectOutputStream newOos = new ObjectOutputStream(new FileOutputStream(localFilePath.toFile()));
@@ -102,17 +95,17 @@ public class LogManager {
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.printf("Erro: %s", e.getMessage());
+            System.err.println("Ocorreu um erro ao escrever o arquivo de dados dos enigmas!");
         }
     }
 
     @SuppressWarnings("unchecked")
     public Map<Integer, StatsEntry> readObject() {
+        Map<Integer, StatsEntry> newMap;
+
         try {
             ObjectInputStream oldOis = new ObjectInputStream(new FileInputStream(localFilePath.toFile()));
             Object oldFile = oldOis.readObject();
-
-            Map<Integer, StatsEntry> newMap;
 
             if (oldFile instanceof Map) {
                 //Assumindo que o Map dentro do arquivo é um Map<Integer, StatsEntry>
@@ -125,12 +118,15 @@ public class LogManager {
 
             //Fechando antes de abrir uma nova OutputStream no futuro
             oldOis.close();
-            return newMap;
 
+        } catch (EOFException e) {
+            newMap = new HashMap<>();
         } catch (Exception e) {
+            newMap = new HashMap<>();
             e.printStackTrace();
-            System.err.printf("Erro: %s", e.getMessage());
-            return null;
+            System.err.println("Ocorreu um erro ao ler o arquivo de dados dos enigmas!");
         }
+
+        return newMap;
     }
 }
