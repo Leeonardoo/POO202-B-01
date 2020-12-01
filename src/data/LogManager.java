@@ -43,7 +43,7 @@ public class LogManager {
 
     //TODO
     public int getQuantasAtivacoes() {
-        return -1;
+        return 0;
     }
 
     public int getQuantasExecucoesEnigma(byte enigma) {
@@ -57,18 +57,27 @@ public class LogManager {
     }
 
     public int getQuantasRespostasCorretasEnigma(byte enigma) {
-        StatsEntry entry = readObject().get(this.localFilePath);
-        return entry.getTotalRightAnswers();
+    	   StatsEntry entry = readObject().get(enigma);
+
+           if (entry == null) {
+               return 0;
+           } else {
+               return entry.getTotalRightAnswers();
+           }
     }
 
     public int getQuantosErrosCometidosEnigma(byte enigma) {
-        StatsEntry entry = readObject().get(this.localFilePath);
-        return entry.getTotalWrongAnswers();
+    	   StatsEntry entry = readObject().get(enigma);
+
+           if (entry == null) {
+               return 0;
+           } else {
+               return entry.getTotalWrongAnswers();
+           }
     }
 
     //TODO
     public void addQuantasAtivacoes() {
-
     }
 
     public void addQuantasExecucoesEnigma(byte enigma) {
@@ -84,13 +93,27 @@ public class LogManager {
     }
 
     public void addQuantasRespostasCorretasEnigma(byte enigma) {
-        StatsEntry entry = readObject().get(this.localFilePath);
-        writeObject(entry);
+    	 StatsEntry entry = readObject().get(enigma);
+
+         if (entry == null) {
+             entry = new StatsEntry(enigma, 1, 1, 0);
+         } else {
+             entry.setTotalRightAnswers(entry.getTotalRightAnswers() + 1);
+         }
+
+         writeObject(entry);
     }
 
     public void addQuantosErrosCometidosEnigma(byte enigma) {
-        StatsEntry entry = readObject().get(this.localFilePath);
-        writeObject(entry);
+    	StatsEntry entry = readObject().get(enigma);
+
+        if (entry == null) {
+            entry = new StatsEntry(enigma, 1, 0, 1);
+        } else {
+            entry.setTotalWrongAnswers(entry.getTotalWrongAnswers() + 1);
+        }
+
+        writeObject(entry);;
     }
 
     public void writeObject(StatsEntry entry) {
