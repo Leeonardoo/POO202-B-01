@@ -3,17 +3,13 @@ package model;
 import java.io.Serializable;
 
 public class StatsEntry implements Serializable{
-    private int enigmaId, totalActivations, totalExecutions, totalRightAnswers, totalWrongAnswers;
+    private int enigmaId, totalExecutions, totalRightAnswers, totalWrongAnswers;
 
-    public int getTotalActivations() {
-        return totalActivations;
-    }
-
-    public void setTotalActivations(int totalActivations) {
-        if (totalActivations < 0) {
-            throw new IllegalArgumentException("O número de ativações não pode ser menor que 0!");
-        }
-        this.totalActivations = totalActivations;
+    public StatsEntry(int enigmaId, int totalExecutions, int totalRightAnswers, int totalWrongAnswers) {
+        this.setEnigmaId(enigmaId);
+        this.setTotalExecutions(totalExecutions);
+        this.setTotalRightAnswers(totalRightAnswers);
+        this.setTotalWrongAnswers(totalWrongAnswers);
     }
 
     public int getTotalExecutions() {

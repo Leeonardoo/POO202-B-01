@@ -12,9 +12,11 @@ import model.StatsEntry;
 public class LogManager {
 
     private final Path localFilePath;
+    private final Path localModuleFilePath;
 
     public LogManager(Path path) {
         localFilePath = Paths.get(path.toString(), "ModuloB01", "data.dat");
+        localModuleFilePath = Paths.get(path.toString(), "ModuloB01", "data_module.dat");
 
         try {
             Path dirPath = Paths.get(path.toUri().resolve("ModuloB01"));
@@ -30,6 +32,11 @@ public class LogManager {
                 //Criando arquivo onde os dados vão ficar
                 Files.createFile(localFilePath);
             }
+
+            if (!Files.exists(localModuleFilePath)) {
+                Files.createFile(localModuleFilePath);
+            }
+
         } catch (IOException e) {
             System.err.printf("Erro ao criar os arquivos do módulo!: %s", e.getMessage());
         }
