@@ -43,8 +43,11 @@ public class LogManager {
             }
 
         } catch (IOException e) {
+            e.printStackTrace();
             System.err.printf("Erro ao criar os arquivos do módulo!: %s", e.getMessage());
         }
+
+        writeObject(new StatsEntry(1,1,1,1));
     }
 
     public int getQuantasAtivacoes() {
@@ -86,19 +89,19 @@ public class LogManager {
             //Caso nenhum erro aconteceu ao tentar ler o arquivo
             if (statsMap != null) {
                 statsMap.put(entry.getEnigmaId(), entry);
-
-                ObjectOutputStream newOos = new ObjectOutputStream(new FileOutputStream(localFilePath.toFile()));
-                newOos.writeObject(statsMap);
-
-                //Garantindo que os novos dados estão salvos
-                newOos.flush();
-                newOos.close();
             } else {
-                //Caso ocorreu, não temos um Map e é impossível continuar
-                throw new FileNotFoundException("Ocorreu um erro ao ler o arquivo de dados do módulo!");
+                statsMap = new HashMap<Integer, StatsEntry>();
             }
 
+            ObjectOutputStream newOos = new ObjectOutputStream(new FileOutputStream(localFilePath.toFile()));
+            newOos.writeObject(statsMap);
+
+            //Garantindo que os novos dados estão salvos
+            newOos.flush();
+            newOos.close();
+
         } catch (Exception e) {
+            e.printStackTrace();
             System.err.printf("Erro: %s", e.getMessage());
         }
     }
@@ -125,6 +128,7 @@ public class LogManager {
             return newMap;
 
         } catch (Exception e) {
+            e.printStackTrace();
             System.err.printf("Erro: %s", e.getMessage());
             return null;
         }

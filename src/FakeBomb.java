@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Random;
@@ -54,6 +56,12 @@ public class FakeBomb implements BombaInterface {
 
     @Override
     public Path getCaminhoArquivos() {
+        Path filePath = Paths.get("logs-fake");
+        try {
+            Files.createDirectories(filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return Paths.get("logs-fake");
     }
 
