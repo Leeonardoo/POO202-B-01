@@ -17,21 +17,22 @@ public class LogManager {
 
     public LogManager(Path path) {
         localFilePath = Paths.get(path.toString(), "ModuloB01", "data.dat");
-        localModuleFilePath = Paths.get(path.toString(), "ModuloB01", "data_module.dat");
+        localModuleFilePath = Paths.get(path.toString(), "ModuloB01", "module_data.dat");
 
         try {
             Path dirPath = Paths.get(path.toUri().resolve("ModuloB01"));
 
+            //Caso o diretório do módulo ainda não existir, é criado antes
             if (!Files.exists(dirPath)) {
                 Files.createDirectories(dirPath);
             }
 
-            //Se o [...pathBomba...]/ModuloB01/data.dat não existir
+            //Se o [...pathBomba...]/ModuloB01/data.dat não existir é criado um arquivo vazio antes
             if (!Files.exists(localFilePath)) {
-                //Criando arquivo onde os dados vão ficar
                 Files.createFile(localFilePath);
             }
 
+            //Se o [...pathBomba...]/ModuloB01/module_data.dat não existir é criado um arquivo vazio antes
             if (!Files.exists(localModuleFilePath)) {
                 Files.createFile(localModuleFilePath);
             }
@@ -53,7 +54,6 @@ public class LogManager {
 
     public int getQuantasExecucoesEnigma(byte enigma) {
         StatsEntry entry = readStats().get(enigma);
-
         if (entry == null) {
             return 0;
         } else {
@@ -63,7 +63,6 @@ public class LogManager {
 
     public int getQuantasRespostasCorretasEnigma(byte enigma) {
         StatsEntry entry = readStats().get(enigma);
-
         if (entry == null) {
             return 0;
         } else {
@@ -73,7 +72,6 @@ public class LogManager {
 
     public int getQuantosErrosCometidosEnigma(byte enigma) {
         StatsEntry entry = readStats().get(enigma);
-
         if (entry == null) {
             return 0;
         } else {
@@ -95,7 +93,6 @@ public class LogManager {
 
     public void addQuantasExecucoesEnigma(byte enigma) {
         StatsEntry entry = readStats().get(enigma);
-
         if (entry == null) {
             entry = new StatsEntry(enigma, 1, 0, 0);
         } else {
@@ -107,7 +104,6 @@ public class LogManager {
 
     public void addQuantasRespostasCorretasEnigma(byte enigma) {
         StatsEntry entry = readStats().get(enigma);
-
         if (entry == null) {
             entry = new StatsEntry(enigma, 1, 1, 0);
         } else {
@@ -119,7 +115,6 @@ public class LogManager {
 
     public void addQuantosErrosCometidosEnigma(byte enigma) {
         StatsEntry entry = readStats().get(enigma);
-
         if (entry == null) {
             entry = new StatsEntry(enigma, 1, 0, 1);
         } else {
@@ -149,6 +144,18 @@ public class LogManager {
             newOos.flush();
             newOos.close();
 
+            System.out.printf(
+                    "[Modulo01/LogManager@writeStats] O novo objeto de estatísticas do enigma escrito tem os dados:\n" +
+                            "enigmaId: %s\n" +
+                            "totalExecutions: %s\n" +
+                            "totalRightAnswers: %s\n" +
+                            "totalWrongAnswers: %s\n",
+                    entry.getEnigmaId(),
+                    entry.getTotalExecutions(),
+                    entry.getTotalRightAnswers(),
+                    entry.getTotalWrongAnswers()
+            );
+
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Ocorreu um erro ao escrever o arquivo de dados dos enigmas!");
@@ -164,7 +171,7 @@ public class LogManager {
             Object oldFile = oldOis.readObject();
 
             if (oldFile instanceof Map) {
-                //Assumindo que o Map dentro do arquivo é um Map<Integer, StatsEntry>
+                //Assumindo que o Map dentro do arquivo é um Map<Byte, StatsEntry>
                 //Agora livre pra colocar a nova entidade no map
                 newMap = (Map<Byte, StatsEntry>) oldFile;
             } else {
@@ -176,6 +183,7 @@ public class LogManager {
             oldOis.close();
 
         } catch (EOFException e) {
+            //Exception esperada na primeira tentativa (arquivo vazio)
             newMap = new HashMap<>();
         } catch (Exception e) {
             newMap = new HashMap<>();
@@ -203,6 +211,18 @@ public class LogManager {
             newOos.flush();
             newOos.close();
 
+            int activations;
+            if (stats != null) {
+                activations = stats.getTotalActivations();
+            } else {
+                activations = 0;
+            }
+
+            System.out.printf(
+                    "[Modulo01/LogManager@writeModuleStats] O novo objeto de estatísticas do módulo escrito tem os dados:\n" +
+                            "totalActivations: %s\n", activations
+            );
+
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Ocorreu um erro ao escrever o arquivo de dados do módulo!");
@@ -217,11 +237,10 @@ public class LogManager {
             Object oldFile = oldOis.readObject();
 
             if (oldFile instanceof ModuleStats) {
-                //Assumindo que o Map dentro do arquivo é um Map<Integer, StatsEntry>
-                //Agora livre pra colocar a nova entidade no map
+                //Agora livre pra escrever a nova entidade
                 newStats = (ModuleStats) oldFile;
             } else {
-                //Se ainda não é um map (primeira execução), um novo é criado
+                //Se ainda não é um ModuleStats, um novo é criado
                 newStats = new ModuleStats();
             }
 
@@ -229,6 +248,7 @@ public class LogManager {
             oldOis.close();
 
         } catch (EOFException e) {
+            //Exception esperada na primeira tentativa (arquivo vazio)
             newStats = new ModuleStats();
         } catch (Exception e) {
             newStats = new ModuleStats();
