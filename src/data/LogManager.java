@@ -122,7 +122,6 @@ public class LogManager {
         }
 
         writeStats(entry);
-        ;
     }
 
     private void writeStats(StatsEntry entry) {

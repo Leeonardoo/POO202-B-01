@@ -36,30 +36,30 @@ public class Enigma1PredicadoUi extends BaseEnigmaUi {
 		
 		btnNewButtonA = new JButton(enigmaCallback.getEnigma().getOptions()[0]);
 		btnNewButtonA.setFont(new Font("Dialog", Font.BOLD, 10));
-		btnNewButtonA.setBounds(9, 101, 334, 23);
+		btnNewButtonA.setBounds(13, 103, 311, 23);
 		btnNewButtonA.addActionListener(e -> onConfirm(enigmaCallback.onUserConfirm(0)));
 		frame.getContentPane().add(btnNewButtonA);
 		
 		btnNewButtonB = new JButton(enigmaCallback.getEnigma().getOptions()[1]);
 		btnNewButtonB.setFont(new Font("Dialog", Font.BOLD, 10));
-		btnNewButtonB.setBounds(9, 131, 334, 23);
+		btnNewButtonB.setBounds(13, 131, 311, 23);
 		btnNewButtonB.addActionListener(e -> onConfirm(enigmaCallback.onUserConfirm(1)));
 		frame.getContentPane().add(btnNewButtonB);
 		
 		btnNewButtonC = new JButton(enigmaCallback.getEnigma().getOptions()[2]);
 		btnNewButtonC.setFont(new Font("Dialog", Font.BOLD, 10));
-		btnNewButtonC.setBounds(9, 159, 334, 23);
+		btnNewButtonC.setBounds(13, 159, 311, 23);
 		btnNewButtonC.addActionListener(e -> onConfirm(enigmaCallback.onUserConfirm(2)));
 		frame.getContentPane().add(btnNewButtonC);
 		
 		btnNewButtonD = new JButton(enigmaCallback.getEnigma().getOptions()[3]);
 		btnNewButtonD.setFont(new Font("Dialog", Font.BOLD, 10));
-		btnNewButtonD.setBounds(9, 187, 334, 23);
+		btnNewButtonD.setBounds(13, 187, 311, 23);
 		btnNewButtonD.addActionListener(e -> onConfirm(enigmaCallback.onUserConfirm(3)));
 		frame.getContentPane().add(btnNewButtonD);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(13, 11, 326, 81);
+		scrollPane.setBounds(13, 11, 311, 81);
 		frame.getContentPane().add(scrollPane);
 		
 		JLabel lblNewLabel = new JLabel(enigmaCallback.getEnigma().getText());

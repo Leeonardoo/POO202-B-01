@@ -32,7 +32,7 @@ public class Enigma2PredicadoUi extends BaseEnigmaUi {
         frame.getContentPane().setLayout(null);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(12, 13, 328, 115);
+        scrollPane.setBounds(12, 13, 312, 115);
         frame.getContentPane().add(scrollPane);
 
         JLabel lblNewLabel = new JLabel(enigmaCallback.getEnigma().getText());
@@ -65,7 +65,7 @@ public class Enigma2PredicadoUi extends BaseEnigmaUi {
         frame.getContentPane().add(rdbtnNewRadioButton_3);
 
         confirmButton = new JButton("Confirmar");
-        confirmButton.setBounds(214, 143, 124, 46);
+        confirmButton.setBounds(214, 143, 110, 46);
         confirmButton.addActionListener(e -> {
             if (buttonGroup.getSelection() != null &&
                     buttonGroup.getSelection().getActionCommand() != null &&
