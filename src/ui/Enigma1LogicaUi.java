@@ -55,7 +55,7 @@ public class Enigma1LogicaUi extends BaseEnigmaUi {
         frame.getContentPane().add(indicator);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(10, 11, 314, 124);
+        scrollPane.setBounds(10, 0, 314, 135);
         frame.getContentPane().add(scrollPane);
 
         JLabel lblNewLabel = new JLabel(enigmaCallback.getEnigma().getText());

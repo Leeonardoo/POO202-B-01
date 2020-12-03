@@ -32,7 +32,7 @@ public class Enigma2PredicadoUi extends BaseEnigmaUi {
         frame.getContentPane().setLayout(null);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(12, 13, 312, 115);
+        scrollPane.setBounds(12, 0, 312, 128);
         frame.getContentPane().add(scrollPane);
 
         JLabel lblNewLabel = new JLabel(enigmaCallback.getEnigma().getText());
